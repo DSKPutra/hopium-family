@@ -55,3 +55,7 @@ playwright-report/
 # supabase
 supabase/.temp/
 supabase/.branches/
+
+# deploy links
+.vercel
+.netlify

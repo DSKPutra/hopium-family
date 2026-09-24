@@ -52,7 +52,7 @@
     "ios": "expo start --ios",
     "android": "expo start --android",
     "lint": "expo lint",
-    "export:web": "expo export --platform web",
+    "export:web": "expo export --platform web && cp dist/+not-found.html dist/404.html",
     "doctor": "expo-doctor"
   },
   "private": true
