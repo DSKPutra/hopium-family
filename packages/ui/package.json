@@ -1,0 +1,9 @@
+{
+  "name": "@hopium/ui",
+  "version": "1.0.0",
+  "private": true,
+  "description": "hopium.family design tokens and primitive React Native components.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "sideEffects": false
+}

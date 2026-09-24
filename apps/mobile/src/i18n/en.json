@@ -1,0 +1,20 @@
+{
+  "brand": {
+    "name": "hopium.family",
+    "shortName": "hopium",
+    "tagline": "stay high on conviction.",
+    "lineTogether": "hope together, trade together.",
+    "lineFamily": "the family that trades together.",
+    "lineDose": "your daily dose of conviction."
+  },
+  "common": {
+    "demoMode": "demo mode",
+    "retry": "Try again",
+    "back": "Back",
+    "goHome": "go home"
+  },
+  "notFound": {
+    "title": "page not found",
+    "body": "This page doesn't exist or was moved."
+  }
+}

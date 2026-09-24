@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "moduleResolution": "bundler",
+    "module": "esnext",
+    "target": "es2022",
+    "lib": ["es2022", "dom"]
+  }
+}

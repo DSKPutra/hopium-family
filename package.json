@@ -1,0 +1,31 @@
+{
+  "name": "hopium-family",
+  "private": true,
+  "version": "1.0.0",
+  "description": "hopium.family — social trading super-app (web + iOS + Android, one codebase)",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "npm run start -w @hopium/mobile",
+    "web": "npm run web -w @hopium/mobile",
+    "ios": "npm run ios -w @hopium/mobile",
+    "android": "npm run android -w @hopium/mobile",
+    "typecheck": "tsc --noEmit -p packages/core && tsc --noEmit -p packages/ui && tsc --noEmit -p apps/mobile",
+    "lint": "npm run lint -w @hopium/mobile && eslint --no-error-on-unmatched-pattern packages scripts",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "export:web": "npm run export:web -w @hopium/mobile",
+    "doctor": "npm run doctor -w @hopium/mobile",
+    "format": "prettier --write .",
+    "verify": "npm run typecheck && npm run lint && npm test && npm run export:web"
+  },
+  "engines": {
+    "node": ">=20.19"
+  },
+  "overrides": {
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  }
+}

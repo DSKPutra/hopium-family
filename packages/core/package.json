@@ -1,0 +1,13 @@
+{
+  "name": "@hopium/core",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pure TypeScript domain layer: types, schemas, money + trading math, provider interfaces and mocks.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "sideEffects": false,
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "ts-jest": "^29.4.13"
+  }
+}

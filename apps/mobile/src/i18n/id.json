@@ -1,0 +1,20 @@
+{
+  "brand": {
+    "name": "hopium.family",
+    "shortName": "hopium",
+    "tagline": "tetap yakin sama keyakinanmu.",
+    "lineTogether": "berharap bareng, trade bareng.",
+    "lineFamily": "keluarga yang trade bareng.",
+    "lineDose": "dosis harian keyakinanmu."
+  },
+  "common": {
+    "demoMode": "mode demo",
+    "retry": "Coba lagi",
+    "back": "Kembali",
+    "goHome": "ke beranda"
+  },
+  "notFound": {
+    "title": "halaman tidak ditemukan",
+    "body": "Halaman ini tidak ada atau sudah dipindahkan."
+  }
+}
