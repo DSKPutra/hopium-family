@@ -5,5 +5,8 @@
   "description": "hopium.family design tokens and primitive React Native components.",
   "main": "src/index.ts",
   "types": "src/index.ts",
-  "sideEffects": false
+  "sideEffects": false,
+  "dependencies": {
+    "@hopium/core": "*"
+  }
 }
