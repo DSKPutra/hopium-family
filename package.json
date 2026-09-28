@@ -19,7 +19,9 @@
     "export:web": "npm run export:web -w @hopium/mobile",
     "doctor": "npm run doctor -w @hopium/mobile",
     "format": "prettier --write .",
-    "verify": "npm run typecheck && npm run lint && npm test && npm run export:web"
+    "verify": "npm run typecheck && npm run lint && npm test && npm run export:web",
+    "icons": "tsx scripts/generate-icons.ts",
+    "legal": "tsx scripts/build-legal.ts"
   },
   "engines": {
     "node": ">=20.19"

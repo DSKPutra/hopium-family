@@ -1,7 +1,8 @@
-import { palette, themeVars, type ColorScheme, type Palette } from '@hopium/ui';
 import { vars } from 'nativewind';
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useMemo, type ReactNode } from 'react';
 import { Platform, useColorScheme as useSystemScheme, View } from 'react-native';
+
+import { palette, themeVars, type ColorScheme, type Palette } from './tokens';
 
 export type ThemePreference = ColorScheme | 'system';
 
@@ -17,12 +18,16 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 interface ThemeProviderProps {
   children: ReactNode;
   /** Brand default is dark; `system` follows the OS setting. */
-  initialPreference?: ThemePreference;
+  preference: ThemePreference;
+  onPreferenceChange: (next: ThemePreference) => void;
 }
 
-export function ThemeProvider({ children, initialPreference = 'dark' }: ThemeProviderProps) {
+/**
+ * Applies the token palette as CSS variables (NativeWind `vars()`), so every
+ * `bg-surface` / `text-gain` class follows the active scheme.
+ */
+export function ThemeProvider({ children, preference, onPreferenceChange }: ThemeProviderProps) {
   const system = useSystemScheme();
-  const [preference, setPreference] = useState<ThemePreference>(initialPreference);
   const scheme: ColorScheme =
     preference === 'system' ? (system === 'light' ? 'light' : 'dark') : preference;
 
@@ -37,11 +42,12 @@ export function ThemeProvider({ children, initialPreference = 'dark' }: ThemePro
     for (const [name, value] of Object.entries(cssVars)) root.style.setProperty(name, value);
     root.style.colorScheme = scheme;
     root.style.backgroundColor = palette[scheme].bg;
+    document.body.style.backgroundColor = palette[scheme].bg;
   }, [cssVars, scheme]);
 
   const value = useMemo<ThemeContextValue>(
-    () => ({ scheme, preference, colors: palette[scheme], setPreference }),
-    [scheme, preference],
+    () => ({ scheme, preference, colors: palette[scheme], setPreference: onPreferenceChange }),
+    [scheme, preference, onPreferenceChange],
   );
 
   return (

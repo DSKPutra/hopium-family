@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <clipPath id="capsule"><rect x="250" y="307" width="300" height="600" rx="150"/></clipPath>
+  </defs>
+  
+  <g transform="translate(512 512) scale(1) translate(-522 -508)">
+    <g transform="rotate(30 400 607)">
+      <g clip-path="url(#capsule)">
+        <rect x="250" y="307" width="300" height="600" fill="#8B5CFF"/>
+        <rect x="250" y="307" width="300" height="300" fill="#3DFFA8"/>
+        <rect x="250" y="599" width="300" height="16" fill="#07060F" opacity="0.9"/>
+      </g>
+      <rect x="305" y="380" width="44" height="170" rx="22" fill="#FFFFFF" opacity="0.35"/>
+    </g>
+    <path d="M755 130 C766 214 776 234 870 245 C776 256 766 276 755 360 C744 276 734 256 640 245 C734 234 744 214 755 130 Z" fill="#FFD166"/>
+    <path d="M880 372 C884 400 888 404 916 408 C888 412 884 416 880 444 C876 416 872 412 844 408 C872 404 876 400 880 372 Z" fill="#FFD166" opacity="0.8"/>
+  </g>
+</svg>

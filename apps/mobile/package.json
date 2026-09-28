@@ -9,6 +9,7 @@
     "@hookform/resolvers": "^5.9.1",
     "@hopium/core": "*",
     "@hopium/ui": "*",
+    "@react-navigation/bottom-tabs": "^7.19.2",
     "@sentry/react-native": "~7.11.0",
     "@shopify/flash-list": "2.0.2",
     "@supabase/supabase-js": "^2.117.1",
@@ -80,7 +81,7 @@
     "ios": "expo start --ios",
     "android": "expo start --android",
     "lint": "expo lint",
-    "export:web": "expo export --platform web && cp dist/+not-found.html dist/404.html",
+    "export:web": "expo export --platform web && node ../../scripts/postexport.js",
     "doctor": "expo-doctor"
   },
   "private": true
