@@ -230,6 +230,10 @@ export class DemoBackend implements Backend {
 
   saveNow(): void {
     if (!this.opts.storage) return;
+    if (this.saveTimer) {
+      clearTimeout(this.saveTimer);
+      this.saveTimer = null;
+    }
     const state: PersistedState = {
       version: DB_VERSION,
       db: this.db,
@@ -241,7 +245,13 @@ export class DemoBackend implements Backend {
 
   private changed(...events: BackendEvent[]): void {
     for (const e of events) this.emit(e);
-    this.scheduleSave();
+    // User-initiated writes persist immediately so a reload can't lose them;
+    // background churn (bot trades, likes) is debounced.
+    const critical = events.some((e) =>
+      ['session', 'profile', 'orders', 'positions', 'kyc'].includes(e.type),
+    );
+    if (critical) this.saveNow();
+    else this.scheduleSave();
   }
 
   // ─── events ────────────────────────────────────────────────────────────

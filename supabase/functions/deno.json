@@ -1,0 +1,11 @@
+{
+  "imports": {
+    "decimal.js": "npm:decimal.js@10.6.0",
+    "zod": "npm:zod@4.6.5",
+    "@supabase/supabase-js": "npm:@supabase/supabase-js@2.117.1",
+    "@hopium/core/": "../../packages/core/src/",
+    "std/assert": "jsr:@std/assert@1"
+  },
+  "unstable": ["sloppy-imports"],
+  "lint": { "rules": { "exclude": ["no-sloppy-imports"] } }
+}

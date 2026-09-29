@@ -1,0 +1,83 @@
+# Mobile e2e (Maestro): onboarding → follow → buy $HOPE → thesis → perp 3× with TP/SL → close → language.
+appId: family.hopium.app
+---
+- launchApp:
+    clearState: true
+- tapOn:
+    id: continue-email
+- tapOn:
+    id: email-input
+- inputText: maestro@example.com
+- tapOn:
+    id: send-code
+- tapOn:
+    id: otp-0
+- inputText: "123456"
+- tapOn:
+    id: username-input
+- inputRandomText:
+    length: 8
+- extendedWaitUntil:
+    visible: .*is available
+    timeout: 5000
+- tapOn:
+    id: onboarding-next
+- tapOn:
+    id: onboarding-next
+- tapOn:
+    id: interest-memecoins
+- tapOn:
+    id: onboarding-next
+- tapOn: Indonesia
+- tapOn:
+    id: birth-year-input
+- inputText: "1995"
+- tapOn:
+    id: onboarding-next
+- scrollUntilVisible:
+    element:
+      id: risk-checkbox
+    direction: DOWN
+- tapOn:
+    id: risk-checkbox
+- tapOn:
+    id: risk-continue
+- tapOn:
+    id: follow-top5
+- tapOn:
+    id: onboarding-finish
+- assertVisible: legends are buying.*
+
+# Buy $25 of $HOPE
+- openLink: hopium://asset/HOPE
+- tapOn:
+    id: asset-buy
+- tapOn:
+    id: chip-25
+- assertVisible:
+    id: quote-breakdown
+- swipe:
+    from:
+      id: order-confirm
+    direction: RIGHT
+- extendedWaitUntil:
+    visible:
+      id: order-success
+    timeout: 10000
+- tapOn:
+    id: order-done
+
+# Post a thesis
+- openLink: hopium://thesis/new?asset=fam
+- runFlow: thesis.yaml
+
+# Perps: 3× long with TP/SL, then close
+- openLink: hopium://perps/sol-perp
+- runFlow: perp.yaml
+
+# Language
+- openLink: hopium://settings/language
+- tapOn:
+    id: language-id
+- openLink: hopium://
+- assertVisible: para legend lagi beli.*

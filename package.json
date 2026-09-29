@@ -21,7 +21,11 @@
     "format": "prettier --write .",
     "verify": "npm run typecheck && npm run lint && npm test && npm run export:web",
     "icons": "tsx scripts/generate-icons.ts",
-    "legal": "tsx scripts/build-legal.ts"
+    "legal": "tsx scripts/build-legal.ts",
+    "seed:sql": "tsx scripts/seed-demo.ts",
+    "e2e:web": "playwright test",
+    "e2e:mobile": "maestro test e2e/maestro/happy-path.yaml",
+    "test:functions": "npx --yes deno@2 test --allow-env --allow-net=api.coingecko.com,api.hyperliquid.xyz --config supabase/functions/deno.json supabase/functions"
   },
   "engines": {
     "node": ">=20.19"

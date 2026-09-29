@@ -1,0 +1,24 @@
+appId: family.hopium.app
+---
+- tapOn:
+    id: perp-margin
+- eraseText
+- inputText: "100"
+- tapOn:
+    id: tick-3
+- tapOn:
+    id: perp-tp
+- inputText: "10000"
+- tapOn:
+    id: perp-sl
+- inputText: "1"
+- tapOn:
+    id: perp-open
+- extendedWaitUntil:
+    visible:
+      id: position-SOL-PERP
+    timeout: 10000
+- tapOn:
+    id: close-100
+- assertNotVisible:
+    id: position-SOL-PERP

@@ -3,7 +3,7 @@
  * size, fee and PnL value crosses boundaries as a decimal string and is
  * computed with decimal.js — never with JavaScript floating point.
  */
-import DecimalJs from 'decimal.js';
+import { Decimal as DecimalJs } from 'decimal.js';
 
 import type { Decimal } from './types';
 

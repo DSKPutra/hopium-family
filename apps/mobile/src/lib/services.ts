@@ -7,6 +7,7 @@ import {
   type Providers,
 } from '@hopium/core';
 import * as WebBrowser from 'expo-web-browser';
+import { AppState, Platform } from 'react-native';
 
 import { env, useSupabase } from './env';
 import { kv } from './storage';
@@ -71,9 +72,25 @@ export function getServices(): Services {
       },
     });
     backend = demo;
+    flushOnExit(demo);
   }
   services = { backend, providers, mock, market: providers.marketData, demo };
   return services;
+}
+
+/** Persist pending demo state when the tab is hidden/closed or the app backgrounds. */
+function flushOnExit(demo: DemoBackend): void {
+  if (Platform.OS === 'web') {
+    if (typeof window === 'undefined') return;
+    window.addEventListener('pagehide', () => demo.saveNow());
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') demo.saveNow();
+    });
+    return;
+  }
+  AppState.addEventListener('change', (state) => {
+    if (state !== 'active') demo.saveNow();
+  });
 }
 
 /** Convenience accessor for non-React code. */

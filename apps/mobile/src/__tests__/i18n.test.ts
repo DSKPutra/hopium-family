@@ -15,7 +15,8 @@ function flatten(tree: Tree, prefix = ''): Record<string, string> {
 
 const EN = flatten(en as Tree);
 const ID = flatten(id as Tree);
-const vars = (s: string) => (s.match(/\{\{\s*\w+\s*\}\}/g) ?? []).map((v) => v.replace(/\s/g, '')).sort();
+const vars = (s: string) =>
+  (s.match(/\{\{\s*\w+\s*\}\}/g) ?? []).map((v) => v.replace(/\s/g, '')).sort();
 
 describe('i18n', () => {
   it('has identical keys in en and id', () => {
@@ -23,15 +24,25 @@ describe('i18n', () => {
   });
 
   it('keeps interpolation variables in sync', () => {
-    for (const key of Object.keys(EN)) expect([key, vars(ID[key] ?? '')]).toEqual([key, vars(EN[key] ?? '')]);
+    for (const key of Object.keys(EN))
+      expect([key, vars(ID[key] ?? '')]).toEqual([key, vars(EN[key] ?? '')]);
   });
 
   it('has no empty strings', () => {
-    for (const [key, value] of [...Object.entries(EN), ...Object.entries(ID)]) expect([key, value.trim().length > 0]).toEqual([key, true]);
+    for (const [key, value] of [...Object.entries(EN), ...Object.entries(ID)])
+      expect([key, value.trim().length > 0]).toEqual([key, true]);
   });
 
   it('never promises profits (banned phrases)', () => {
-    const banned = ['guaranteed', 'guarantee profit', 'risk-free', 'risk free', 'pasti untung', 'tanpa risiko', 'dijamin untung'];
+    const banned = [
+      'guaranteed',
+      'guarantee profit',
+      'risk-free',
+      'risk free',
+      'pasti untung',
+      'tanpa risiko',
+      'dijamin untung',
+    ];
     for (const [key, value] of [...Object.entries(EN), ...Object.entries(ID)]) {
       const lower = value.toLowerCase();
       // Negated forms ("does not guarantee") are the required disclaimers.
@@ -46,6 +57,8 @@ describe('i18n', () => {
     expect(EN['order.firstTrade']).toBe('first trade done. welcome to the family 🫶');
     expect(ID['leaderboard.rankUp']).toBe('kamu naik. peringkat #{{rank}} 🚀');
     expect(EN['copy.disclaimer']).toBe('Copying a trade does not guarantee the same result.');
-    expect(ID['perps.nearLiquidation']).toBe('Posisi {{market}} kamu mendekati estimasi harga likuidasi.');
+    expect(ID['perps.nearLiquidation']).toBe(
+      'Posisi {{market}} kamu mendekati estimasi harga likuidasi.',
+    );
   });
 });

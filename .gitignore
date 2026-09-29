@@ -59,3 +59,7 @@ supabase/.branches/
 # deploy links
 .vercel
 .netlify
+
+# e2e
+test-results/
+playwright-report/

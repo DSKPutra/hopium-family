@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["TEAMID.family.hopium.app"],
+        "components": [{ "/": "/u/*" }, { "/": "/a/*" }, { "/": "/t/*" }, { "/": "/post/*" }]
+      }
+    ]
+  },
+  "webcredentials": { "apps": ["TEAMID.family.hopium.app"] }
+}
