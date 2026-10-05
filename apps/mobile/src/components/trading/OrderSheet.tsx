@@ -329,7 +329,11 @@ export function OrderSheet({ request, onClose }: { request: OrderRequest; onClos
           <RiskBanner tone="info" message={t('asset.stockDisclaimer')} />
         ) : null}
         {asset.tags.includes('meme') ? (
-          <RiskBanner tone="warning" message={t('asset.memeRisk')} />
+          <RiskBanner
+            tone="warning"
+            title={t('discover.highVolatility')}
+            message={t('asset.memeRisk')}
+          />
         ) : null}
         {showSlippage ? <SlippageSettings value={slippageBps} onChange={setSlippageBps} /> : null}
 

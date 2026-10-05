@@ -40,4 +40,9 @@ module.exports = defineConfig([
     },
     rules: { 'no-console': 'off' },
   },
+  {
+    // jest.mock factories must load official mocks synchronously.
+    files: ['**/jest.setup.ts'],
+    rules: { '@typescript-eslint/no-require-imports': 'off' },
+  },
 ]);

@@ -13,6 +13,8 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { Seo } from './Seo';
+
 export const ONBOARDING_STEPS = 6;
 
 interface Props {
@@ -46,6 +48,7 @@ export function OnboardingFrame({
   const { colors } = useTheme();
   return (
     <SafeAreaView className="bg-bg flex-1">
+      <Seo title={`${title} · hopium.family`} />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         className="w-full max-w-[560px] flex-1 self-center"

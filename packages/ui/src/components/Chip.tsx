@@ -19,6 +19,8 @@ export function Chip({ label, selected = false, onPress, icon, className, testID
       testID={testID}
       accessibilityRole={onPress ? 'button' : 'text'}
       accessibilityState={{ selected }}
+      // Toggle chips: screen readers on web read pressed state, not `selected`, for buttons.
+      aria-pressed={onPress ? selected : undefined}
       onPress={onPress}
       disabled={!onPress}
       className={cn(

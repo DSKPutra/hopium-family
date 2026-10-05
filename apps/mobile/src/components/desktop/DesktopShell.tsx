@@ -14,7 +14,7 @@ export function DesktopShell({ enabled, children }: { enabled: boolean; children
   return (
     <View className="bg-bg flex-1 flex-row justify-center">
       <Sidebar />
-      <View className="flex-1" style={{ maxWidth: 760 }}>
+      <View className="flex-1" style={{ maxWidth: 680 }}>
         {children}
       </View>
       {width >= 1280 ? <RightRail /> : null}

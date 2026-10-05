@@ -8,16 +8,13 @@ import { View } from 'react-native';
 
 import { useKycStatus, useRegionRule } from '@/hooks/queries';
 
-/**
- * Region feature flags + KYC gate: shows an explanatory screen instead of
- * crashing or silently failing.
- */
-export function FeatureGate({ feature, children }: { feature: Feature; children: ReactNode }) {
-  const { t } = useTranslation();
-  const { colors } = useTheme();
+export type FeatureAccess = 'loading' | 'allowed' | 'region_blocked' | 'kyc_required';
+
+/** Region rule + KYC status for a feature, for screens that adapt chrome around the gate. */
+export function useFeatureAccess(feature: Feature): FeatureAccess {
   const region = useRegionRule();
   const kyc = useKycStatus();
-  if (region.isLoading || kyc.isLoading) return <Skeleton height={200} />;
+  if (region.isLoading || kyc.isLoading) return 'loading';
   const rule = region.data;
   const allowed =
     !rule ||
@@ -28,7 +25,21 @@ export function FeatureGate({ feature, children }: { feature: Feature; children:
         : feature === 'copy_trade'
           ? rule.allowCopyTrade
           : true);
-  if (!allowed) {
+  if (!allowed) return 'region_blocked';
+  if (rule?.requiresKycFor.includes(feature) && kyc.data !== 'approved') return 'kyc_required';
+  return 'allowed';
+}
+
+/**
+ * Region feature flags + KYC gate: shows an explanatory screen instead of
+ * crashing or silently failing.
+ */
+export function FeatureGate({ feature, children }: { feature: Feature; children: ReactNode }) {
+  const { t } = useTranslation();
+  const { colors } = useTheme();
+  const access = useFeatureAccess(feature);
+  if (access === 'loading') return <Skeleton height={200} />;
+  if (access === 'region_blocked') {
     return (
       <EmptyState
         icon={<Globe2 size={36} color={colors.warning} />}
@@ -37,7 +48,7 @@ export function FeatureGate({ feature, children }: { feature: Feature; children:
       />
     );
   }
-  if (rule?.requiresKycFor.includes(feature) && kyc.data !== 'approved') {
+  if (access === 'kyc_required') {
     return (
       <View>
         <EmptyState

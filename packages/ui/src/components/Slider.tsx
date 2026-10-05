@@ -128,6 +128,7 @@ export function Slider({
               accessibilityRole="button"
               accessibilityLabel={formatTick(t)}
               accessibilityState={{ selected: value === t }}
+              aria-pressed={value === t}
               onPress={() => set(t)}
               className={cn(
                 'rounded-pill min-h-[36px] flex-1 items-center justify-center',

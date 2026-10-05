@@ -30,7 +30,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, View } from 'react-native';
 
-import { FeatureGate } from '@/components/FeatureGate';
+import { FeatureGate, useFeatureAccess } from '@/components/FeatureGate';
 import { Seo } from '@/components/Seo';
 import { usePortfolio } from '@/hooks/queries';
 import { useServices } from '@/hooks/useServices';
@@ -52,6 +52,7 @@ export default function Withdraw() {
   const [address, setAddress] = useState('');
   const [amount, setAmount] = useState('');
   const [review, setReview] = useState(false);
+  const access = useFeatureAccess('withdraw');
   const [scanning, setScanning] = useState(false);
   const [permission, requestPermission] = useCameraPermissions();
   const fee = useQuery({
@@ -91,14 +92,16 @@ export default function Withdraw() {
   return (
     <Screen
       footer={
-        <Button
-          testID="withdraw-review"
-          label={t('wallet.review')}
-          size="lg"
-          fullWidth
-          disabled={!parsed.success || !!tooMuch}
-          onPress={() => setReview(true)}
-        />
+        access !== 'allowed' ? undefined : (
+          <Button
+            testID="withdraw-review"
+            label={t('wallet.review')}
+            size="lg"
+            fullWidth
+            disabled={!parsed.success || !!tooMuch}
+            onPress={() => setReview(true)}
+          />
+        )
       }
     >
       <Seo title={`${t('wallet.withdrawTitle')} · hopium.family`} path="/wallet/withdraw" />

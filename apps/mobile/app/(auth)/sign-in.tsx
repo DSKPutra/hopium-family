@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { KeyboardAvoidingView, Platform, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { Seo } from '@/components/Seo';
 import { useServices } from '@/hooks/useServices';
 import { errorMessage, validationMessage } from '@/lib/errors';
 
@@ -48,6 +49,7 @@ export default function SignIn() {
           onPress={() => router.back()}
         />
         <View className="mt-6 flex-1 gap-4">
+          <Seo title={`${t('auth.signIn.title')} · hopium.family`} path="/sign-in" />
           <Text variant="h1">{t('auth.signIn.title')}</Text>
           <Text tone="muted">{t('auth.signIn.body')}</Text>
           <Input

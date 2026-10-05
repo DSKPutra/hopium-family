@@ -113,7 +113,7 @@ export default function History() {
                           : 'default'
                     }
                   >
-                    {a.kind === 'deposit' ? '+' : ''}
+                    {a.kind === 'deposit' ? '+' : a.kind === 'withdrawal' ? '−' : ''}
                     {f.usd(a.amountUsd)}
                   </Text>
                   {a.qty ? (

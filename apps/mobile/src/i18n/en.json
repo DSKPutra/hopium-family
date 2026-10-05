@@ -23,6 +23,7 @@
     "share": "share",
     "copy": "copy",
     "copied": "copied",
+    "linkCopied": "link copied",
     "copyToClipboard": "Copy to clipboard",
     "seeAll": "see all",
     "loading": "loading",
@@ -120,7 +121,10 @@
       "positive": "Amount must be greater than zero.",
       "tooLarge": "That number is too large."
     },
-    "address": { "required": "Enter an address.", "invalid": "That address isn't valid for this network." },
+    "address": {
+      "required": "Enter an address.",
+      "invalid": "That address isn't valid for this network."
+    },
     "thesis": {
       "assetRequired": "Choose an asset.",
       "timeframePast": "Pick a date in the future.",
@@ -332,6 +336,7 @@
     "hint": "try $HOPE, AAPLx or a username"
   },
   "asset": {
+    "shareMessage": "{{symbol}} on hopium.family",
     "watch": "Add to watchlist",
     "unwatch": "Remove from watchlist",
     "watched": "Added to watchlist",
@@ -362,7 +367,7 @@
     "chartLabel": "Price chart for {{symbol}}",
     "priceAlert": "price alert",
     "notFound": "We couldn't find that asset.",
-    "memeRisk": "High volatility: memecoin prices can drop sharply and may go to zero.",
+    "memeRisk": "Memecoin prices can drop sharply and may go to zero.",
     "openPerp": "trade {{symbol}} perps"
   },
   "order": {
@@ -681,7 +686,10 @@
     "primerBody": "Get alerts when legends you follow trade, when your price alerts trigger, and when a position is close to liquidation. You choose what we send in settings.",
     "primerAllow": "turn on notifications",
     "primerLater": "not now",
-    "badge": { "title": "legend status unlocked", "body": "{{icon}} you earned a new badge. check your profile." },
+    "badge": {
+      "title": "legend status unlocked",
+      "body": "{{icon}} you earned a new badge. check your profile."
+    },
     "comment": { "title": "new comment", "body": "@{{username}} commented on your post." },
     "like": { "title": "new like", "body": "@{{username}} liked your post." },
     "follow": { "title": "new follower", "body": "@{{username}} started following you." },
@@ -691,11 +699,17 @@
       "bodyBuy": "@{{username}} just bought {{symbol}}.",
       "bodySell": "@{{username}} just sold {{symbol}}."
     },
-    "liquidated": { "title": "Position liquidated", "body": "Your {{market}} position was liquidated at its liquidation price." },
+    "liquidated": {
+      "title": "Position liquidated",
+      "body": "Your {{market}} position was liquidated at its liquidation price."
+    },
     "tpHit": { "title": "Take-profit filled" },
     "slHit": { "title": "Stop-loss filled" },
     "tpslHit": { "body": "Your {{market}} position was closed." },
-    "liquidationRisk": { "title": "Liquidation risk", "body": "Your {{market}} position is close to its estimated liquidation price." },
+    "liquidationRisk": {
+      "title": "Liquidation risk",
+      "body": "Your {{market}} position is close to its estimated liquidation price."
+    },
     "deposit": { "title": "funds added", "body": "{{amount}} USDC arrived in your wallet." },
     "thesis": {
       "hit": { "title": "thesis hit 🎯" },

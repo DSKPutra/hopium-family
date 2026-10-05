@@ -3,19 +3,22 @@ import { Button, Text, haptics, useTheme } from '@hopium/ui';
 import { router } from 'expo-router';
 import { Copy, Heart, MessageCircle, Share2 } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { Pressable, Share, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { useToggleLike } from '@/hooks/queries';
+import { useShare } from '@/lib/share';
 
 export function PostActions({ item, onCopy }: { item: FeedItem; onCopy?: () => void }) {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const like = useToggleLike();
   const liked = item.likedByMe;
+  const shareLink = useShare();
   const share = () =>
-    void Share.share({
-      message: `${t('feed.shareMessage', { username: `@${item.author.username}` })} https://hopium.family/post/${item.post.id}`,
-    });
+    void shareLink(
+      t('feed.shareMessage', { username: `@${item.author.username}` }),
+      `https://hopium.family/post/${item.post.id}`,
+    );
   return (
     <View className="mt-1 flex-row items-center gap-1">
       <Pressable
@@ -23,6 +26,7 @@ export function PostActions({ item, onCopy }: { item: FeedItem; onCopy?: () => v
         accessibilityRole="button"
         accessibilityLabel={liked ? t('feed.unlike') : t('feed.like')}
         accessibilityState={{ selected: liked }}
+        aria-pressed={liked}
         onPress={() => {
           haptics.light();
           like.mutate({ postId: item.post.id, liked });

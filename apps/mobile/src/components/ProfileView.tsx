@@ -24,7 +24,7 @@ import { router } from 'expo-router';
 import { Bell, BellOff, MoreHorizontal, Settings, Share2 } from 'lucide-react-native';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, Share, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { ThesisBody } from '@/components/feed/FeedItemView';
 import { Seo } from '@/components/Seo';
@@ -40,6 +40,7 @@ import {
 import { useServices } from '@/hooks/useServices';
 import { errorMessage } from '@/lib/errors';
 import { timeAgo, useFormat } from '@/lib/format';
+import { useShare } from '@/lib/share';
 
 type Tab = 'trades' | 'theses' | 'holdings' | 'badges';
 
@@ -66,6 +67,7 @@ function Stat({
 
 export function ProfileView({ username, own = false }: { username: string; own?: boolean }) {
   const { t, i18n } = useTranslation();
+  const share = useShare();
   const { colors } = useTheme();
   const f = useFormat();
   const toast = useToast();
@@ -144,9 +146,10 @@ export function ProfileView({ username, own = false }: { username: string; own?:
               variant="surface"
               icon={<Share2 size={18} color={colors.text} />}
               onPress={() =>
-                void Share.share({
-                  message: `${t('meta.user', { username: profile.username })} https://hopium.family/u/${profile.username}`,
-                })
+                void share(
+                  t('meta.user', { username: profile.username }),
+                  `https://hopium.family/u/${profile.username}`,
+                )
               }
             />
             {own ? (

@@ -160,7 +160,11 @@ describe('DemoBackend happy path', () => {
 
     // Comment + like.
     const post = theses.items[0]!.post;
+    const commentsBefore = post.commentCount;
     await backend.addComment(post.id, 'lfg fam');
+    // Results are copies: a cached post must not change behind the client's back.
+    expect(post.commentCount).toBe(commentsBefore);
+    expect((await backend.getPost(post.id)).post.commentCount).toBe(commentsBefore + 1);
     await expect(backend.addComment(post.id, 'visit www.scam.com')).rejects.toMatchObject({
       code: 'content_rejected',
     });

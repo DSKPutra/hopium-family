@@ -169,6 +169,11 @@ export function moderate(body: string): void {
   }
 }
 
+/** Deep copy of a JSON-shaped backend result (records are plain data). */
+function detach<T>(value: T): T {
+  return value === undefined ? value : (JSON.parse(JSON.stringify(value)) as T);
+}
+
 /**
  * In-memory implementation of every backend endpoint, mirroring the Supabase
  * schema, RLS rules, triggers and edge functions so the app works fully
@@ -203,6 +208,18 @@ export class DemoBackend implements Backend {
       this.scheduleSave();
     });
     if (opts.engines !== false) this.startEngines();
+    // Like a network backend, hand callers copies: query caches must never share
+    // (and double-apply mutations to) the live in-memory records.
+    return new Proxy(this, {
+      get(target, prop, receiver) {
+        const value: unknown = Reflect.get(target, prop, receiver);
+        if (typeof value !== 'function' || prop === 'constructor') return value;
+        return (...args: unknown[]) => {
+          const result: unknown = (value as (...a: unknown[]) => unknown).apply(target, args);
+          return result instanceof Promise ? result.then(detach) : result;
+        };
+      },
+    });
   }
 
   // ─── persistence ───────────────────────────────────────────────────────

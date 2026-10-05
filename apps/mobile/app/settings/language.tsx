@@ -28,7 +28,7 @@ export default function LanguageScreen() {
               key={o.value}
               testID={`language-${o.value}`}
               accessibilityRole="radio"
-              accessibilityState={{ selected: active }}
+              accessibilityState={{ checked: active }}
               onPress={() => {
                 set({ language: o.value });
                 void i18n.changeLanguage(o.value);

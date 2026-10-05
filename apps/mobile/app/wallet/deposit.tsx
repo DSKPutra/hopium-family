@@ -160,7 +160,7 @@ export default function Deposit() {
             <Pressable
               key={m.value}
               accessibilityRole="radio"
-              accessibilityState={{ selected: method === m.value }}
+              accessibilityState={{ checked: method === m.value }}
               onPress={() => setMethod(m.value)}
               className={`min-h-[52px] flex-row items-center gap-3 rounded-md border px-4 ${method === m.value ? 'border-primary bg-primary/10' : 'border-border bg-surface'}`}
             >

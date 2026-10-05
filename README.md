@@ -114,7 +114,7 @@ Sign in with any email. In demo mode **any 6-digit code works**. You start with 
 | `npm run test:functions` | Deno tests for the edge functions |
 | `npm run e2e:web` | Playwright happy path on mobile + desktop web (run `npm run export:web` first) |
 | `npm run e2e:mobile` | Maestro flow (requires a running simulator/emulator build) |
-| `npm run export:web` | Static SPA export to `apps/mobile/dist` |
+| `npm run export:web` | Static SPA export to `apps/mobile/dist`, plus prerendered share pages and OG cards (`scripts/prerender-web.ts`; set `SITE_URL` for non-production hosts) |
 | `npm run icons` | Regenerate logo SVGs, app icons, splash, favicon and OG image |
 | `npm run legal` | Compile `assets/legal/*.md` into `src/legal/content.ts` |
 | `npm run seed:sql` | Regenerate `supabase/seed.sql` from the demo world |
@@ -233,5 +233,5 @@ The export is a single-page app (`web.output: "single"`), because routing and st
 - Wallet SDKs (Privy/Dynamic/Turnkey) are React-bound. Register an adapter from the SDK's provider tree; this isn't bundled.
 - Stock-token venue API is a documented REST contract (`RealStockTokenProvider`); adapt it to the venue you choose.
 - Candles and prices in demo mode are simulated (seeded GBM) and deterministic per seed.
-- The web build is a client-rendered SPA. Open Graph tags are set client-side, so crawlers that don't run JS see the default card.
+- The web build is a client-rendered SPA. Share pages with their own title and OG card are prerendered at build time for every catalog asset, perp market, demo trader and seeded thesis; profiles and theses created after the build fall back to the default card for crawlers.
 - iOS/Android were verified through TypeScript, Jest (jest-expo) and expo-doctor in this environment. Run the Maestro flow on a simulator build before release.

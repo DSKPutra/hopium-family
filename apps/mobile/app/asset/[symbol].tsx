@@ -22,7 +22,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { ArrowLeft, BellPlus, Share2, Star } from 'lucide-react-native';
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Share, View } from 'react-native';
+import { View } from 'react-native';
 
 import { ThesisBody } from '@/components/feed/FeedItemView';
 import { PriceChart } from '@/components/PriceChart';
@@ -39,6 +39,7 @@ import {
 import { useLivePrice } from '@/hooks/useLivePrice';
 import { errorMessage } from '@/lib/errors';
 import { displaySymbol, useFormat } from '@/lib/format';
+import { useShare } from '@/lib/share';
 import { useTrade } from '@/providers/TradeProvider';
 import { useSettings } from '@/stores/settings';
 import { useUi } from '@/stores/ui';
@@ -61,6 +62,7 @@ export default function AssetDetail() {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const toast = useToast();
+  const share = useShare();
   const f = useFormat();
   const { openOrder } = useTrade();
   const [range, setRange] = useState<CandleRange>('1D');
@@ -187,9 +189,10 @@ export default function AssetDetail() {
           accessibilityLabel={t('asset.share')}
           icon={<Share2 size={22} color={colors.text} />}
           onPress={() =>
-            void Share.share({
-              message: `${sym} on hopium.family https://hopium.family/a/${asset.symbol}`,
-            })
+            void share(
+              t('asset.shareMessage', { symbol: sym }),
+              `https://hopium.family/a/${asset.symbol}`,
+            )
           }
         />
       </View>

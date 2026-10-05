@@ -75,7 +75,11 @@ export function Sidebar() {
     },
   ];
   return (
-    <View role="navigation" className="border-border h-full w-[240px] gap-1 border-r px-3 py-5">
+    <View
+      role="navigation"
+      style={{ width: 240, flexShrink: 0 }}
+      className="border-border h-full gap-1 border-r px-3 py-5"
+    >
       <View className="mb-4 px-2">
         <LogoLockup size={30} />
         {isDemo ? (
@@ -91,6 +95,7 @@ export function Sidebar() {
             key={label}
             accessibilityRole="link"
             accessibilityState={{ selected: active }}
+            aria-current={active ? 'page' : undefined}
             onPress={() => router.navigate(href)}
             className={`rounded-pill web:focus-visible:outline web:focus-visible:outline-2 web:focus-visible:outline-primary min-h-[44px] flex-row items-center gap-3 px-3 ${active ? 'bg-surface-2' : 'hover:bg-surface'}`}
           >

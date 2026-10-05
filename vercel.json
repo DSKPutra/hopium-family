@@ -5,18 +5,30 @@
   "outputDirectory": "apps/mobile/dist",
   "framework": null,
   "rewrites": [
-    { "source": "/((?!_expo|assets|\\.well-known|favicon\\.png|og-image\\.png|apple-touch-icon\\.png|manifest\\.json|sw\\.js).*)", "destination": "/index.html" }
+    {
+      "source": "/((?!_expo|assets|\\.well-known|favicon\\.png|og/|og-image\\.png|apple-touch-icon\\.png|manifest\\.json|sw\\.js).*)",
+      "destination": "/index.html"
+    }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.coingecko.com https://api.hyperliquid.xyz https://lite-api.jup.ag https://li.quest https://api.moonpay.com https://us.i.posthog.com https://*.ingest.sentry.io; frame-src https://buy.moonpay.com https://withpersona.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'" },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.coingecko.com https://api.hyperliquid.xyz https://lite-api.jup.ag https://li.quest https://api.moonpay.com https://us.i.posthog.com https://*.ingest.sentry.io; frame-src https://buy.moonpay.com https://withpersona.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
+        },
         { "key": "X-Frame-Options", "value": "DENY" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(self), microphone=(), geolocation=(), payment=(self)" },
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" }
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(self), microphone=(), geolocation=(), payment=(self)"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        }
       ]
     },
     {

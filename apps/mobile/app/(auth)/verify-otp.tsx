@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { Seo } from '@/components/Seo';
 import { useServices } from '@/hooks/useServices';
 import { isDemo } from '@/lib/env';
 import { errorMessage } from '@/lib/errors';
@@ -69,6 +70,7 @@ export default function VerifyOtp() {
           onPress={() => router.back()}
         />
         <View className="mt-6 gap-4">
+          <Seo title={`${t('auth.otp.title')} · hopium.family`} />
           <Text variant="h1">{t('auth.otp.title')}</Text>
           <Text tone="muted">{t('auth.otp.body', { email })}</Text>
           {isDemo ? (

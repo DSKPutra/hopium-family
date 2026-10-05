@@ -11,6 +11,7 @@ const types = {
   '.css': 'text/css',
   '.json': 'application/json',
   '.png': 'image/png',
+  '.jpg': 'image/jpeg',
   '.ttf': 'font/ttf',
   '.svg': 'image/svg+xml',
   '.ico': 'image/x-icon',
@@ -20,6 +21,9 @@ http
   .createServer((req, res) => {
     const url = decodeURIComponent((req.url || '/').split('?')[0]);
     let file = path.join(root, url);
+    // Directory index (prerendered share pages), like Vercel/Netlify.
+    if (file.startsWith(root) && fs.existsSync(file) && fs.statSync(file).isDirectory())
+      file = path.join(file, 'index.html');
     if (!file.startsWith(root) || !fs.existsSync(file) || fs.statSync(file).isDirectory())
       file = path.join(root, 'index.html');
     res.writeHead(200, { 'content-type': types[path.extname(file)] || 'application/octet-stream' });

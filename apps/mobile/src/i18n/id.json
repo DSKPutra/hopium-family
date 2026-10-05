@@ -23,6 +23,7 @@
     "share": "bagikan",
     "copy": "salin",
     "copied": "tersalin",
+    "linkCopied": "tautan tersalin",
     "copyToClipboard": "Salin ke papan klip",
     "seeAll": "lihat semua",
     "loading": "memuat",
@@ -120,7 +121,10 @@
       "positive": "Jumlah harus lebih dari nol.",
       "tooLarge": "Angkanya terlalu besar."
     },
-    "address": { "required": "Masukkan alamat.", "invalid": "Alamat tersebut tidak valid untuk jaringan ini." },
+    "address": {
+      "required": "Masukkan alamat.",
+      "invalid": "Alamat tersebut tidak valid untuk jaringan ini."
+    },
     "thesis": {
       "assetRequired": "Pilih aset.",
       "timeframePast": "Pilih tanggal di masa depan.",
@@ -332,6 +336,7 @@
     "hint": "coba $HOPE, AAPLx, atau username"
   },
   "asset": {
+    "shareMessage": "{{symbol}} di hopium.family",
     "watch": "Tambah ke pantauan",
     "unwatch": "Hapus dari pantauan",
     "watched": "Ditambahkan ke pantauan",
@@ -362,7 +367,7 @@
     "chartLabel": "Grafik harga {{symbol}}",
     "priceAlert": "alert harga",
     "notFound": "Kami tidak dapat menemukan aset itu.",
-    "memeRisk": "Volatilitas tinggi: harga memecoin bisa turun tajam dan bisa menjadi nol.",
+    "memeRisk": "Harga memecoin bisa turun tajam dan bisa menjadi nol.",
     "openPerp": "trade perps {{symbol}}"
   },
   "order": {
@@ -681,21 +686,33 @@
     "primerBody": "Dapatkan alert saat legend yang kamu ikuti trading, saat alert harga terpicu, dan saat posisi mendekati likuidasi. Kamu bisa memilih apa yang kami kirim di pengaturan.",
     "primerAllow": "aktifkan notifikasi",
     "primerLater": "nanti saja",
-    "badge": { "title": "status legend terbuka", "body": "{{icon}} kamu dapat badge baru. cek profilmu." },
+    "badge": {
+      "title": "status legend terbuka",
+      "body": "{{icon}} kamu dapat badge baru. cek profilmu."
+    },
     "comment": { "title": "komentar baru", "body": "@{{username}} mengomentari postinganmu." },
     "like": { "title": "suka baru", "body": "@{{username}} menyukai postinganmu." },
     "follow": { "title": "pengikut baru", "body": "@{{username}} mulai mengikutimu." },
-    "orderFilled": { "title": "order terisi", "body": "Order {{side}} {{symbol}} kamu sudah terisi." },
+    "orderFilled": {
+      "title": "order terisi",
+      "body": "Order {{side}} {{symbol}} kamu sudah terisi."
+    },
     "followedTrade": {
       "title": "alert legend",
       "bodyBuy": "@{{username}} baru saja beli {{symbol}}.",
       "bodySell": "@{{username}} baru saja jual {{symbol}}."
     },
-    "liquidated": { "title": "Posisi terlikuidasi", "body": "Posisi {{market}} kamu terlikuidasi di harga likuidasinya." },
+    "liquidated": {
+      "title": "Posisi terlikuidasi",
+      "body": "Posisi {{market}} kamu terlikuidasi di harga likuidasinya."
+    },
     "tpHit": { "title": "Take-profit terisi" },
     "slHit": { "title": "Stop-loss terisi" },
     "tpslHit": { "body": "Posisi {{market}} kamu sudah ditutup." },
-    "liquidationRisk": { "title": "Risiko likuidasi", "body": "Posisi {{market}} kamu mendekati estimasi harga likuidasi." },
+    "liquidationRisk": {
+      "title": "Risiko likuidasi",
+      "body": "Posisi {{market}} kamu mendekati estimasi harga likuidasi."
+    },
     "deposit": { "title": "dana masuk", "body": "{{amount}} USDC sudah masuk ke dompetmu." },
     "thesis": {
       "hit": { "title": "tesis tercapai 🎯" },
