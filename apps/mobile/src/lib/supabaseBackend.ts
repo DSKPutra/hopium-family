@@ -376,11 +376,7 @@ export class SupabaseBackend implements Backend {
     if (patch.language !== undefined) row.language = patch.language;
     if (patch.theme !== undefined) row.theme = patch.theme;
     if (patch.riskAccepted) row.risk_accepted_at = new Date().toISOString();
-    const res = await this.client
-      .from('profiles')
-      .upsert({ id, ...row })
-      .select('*')
-      .single();
+    const res = await this.client.from('profiles').update(row).eq('id', id).select('*').single();
     if (res.error?.code === '23505') throw new AppError('username_taken');
     this.emit({ type: 'profile' });
     return toProfile(this.check(res) as Row);
@@ -538,7 +534,14 @@ export class SupabaseBackend implements Backend {
 
   async follow(userId: string): Promise<void> {
     const me = await this.uid();
-    this.check(await this.client.from('follows').upsert({ follower_id: me, followee_id: userId }));
+    this.check(
+      await this.client
+        .from('follows')
+        .upsert(
+          { follower_id: me, followee_id: userId },
+          { onConflict: 'follower_id,followee_id', ignoreDuplicates: true },
+        ),
+    );
   }
 
   async unfollow(userId: string): Promise<void> {
@@ -553,13 +556,23 @@ export class SupabaseBackend implements Backend {
     this.check(
       await this.client
         .from('follows')
-        .upsert({ follower_id: me, followee_id: userId, notify: on }),
+        .upsert(
+          { follower_id: me, followee_id: userId, notify: on },
+          { onConflict: 'follower_id,followee_id' },
+        ),
     );
   }
 
   async block(userId: string): Promise<void> {
     const me = await this.uid();
-    this.check(await this.client.from('blocks').upsert({ blocker_id: me, blocked_id: userId }));
+    this.check(
+      await this.client
+        .from('blocks')
+        .upsert(
+          { blocker_id: me, blocked_id: userId },
+          { onConflict: 'blocker_id,blocked_id', ignoreDuplicates: true },
+        ),
+    );
     await this.unfollow(userId);
   }
 
@@ -686,7 +699,14 @@ export class SupabaseBackend implements Backend {
 
   async like(postId: string): Promise<void> {
     const me = await this.uid();
-    this.check(await this.client.from('likes').upsert({ post_id: postId, user_id: me }));
+    this.check(
+      await this.client
+        .from('likes')
+        .upsert(
+          { post_id: postId, user_id: me },
+          { onConflict: 'post_id,user_id', ignoreDuplicates: true },
+        ),
+    );
   }
 
   async unlike(postId: string): Promise<void> {

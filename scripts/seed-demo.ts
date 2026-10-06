@@ -27,6 +27,26 @@ import {
 
 const SEED = 20260924;
 
+/** The auth trigger already created an empty profile row; overwrite every seeded column. */
+const PROFILE_UPSERT = [
+  'username',
+  'display_name',
+  'bio',
+  'country_code',
+  'birth_year',
+  'interests',
+  'holdings_public',
+  'share_exact_amounts',
+  'tier',
+  'kyc_status',
+  'language',
+  'onboarded_at',
+  'risk_accepted_at',
+  'created_at',
+]
+  .map((c) => `${c} = excluded.${c}`)
+  .join(', ');
+
 /** Deterministic UUID v4-shaped id for a demo record id. */
 function uuid(id: string): string {
   const h = createHash('sha1').update(`hopium:${id}`).digest('hex');
@@ -88,7 +108,7 @@ export function buildSeedSql(): string {
       `insert into auth.users (id, instance_id, aud, role, email, encrypted_password, email_confirmed_at, created_at, updated_at, raw_app_meta_data, raw_user_meta_data) values (${q(id)}, '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', ${q(`${p.username}@demo.hopium.family`)}, '', now(), ${q(p.createdAt)}, now(), '{"provider":"email"}', '{}') on conflict (id) do nothing;`,
     );
     out.push(
-      `insert into public.profiles (id, username, display_name, bio, country_code, birth_year, interests, holdings_public, share_exact_amounts, tier, kyc_status, language, onboarded_at, risk_accepted_at, created_at) values (${q(id)}, ${q(p.username)}, ${q(p.displayName)}, ${q(p.bio)}, ${q(p.countryCode)}, ${p.birthYear ?? 'null'}, ${arr(p.interests)}, ${p.holdingsPublic}, ${p.shareExactAmounts}, ${q(p.tier)}, 'approved', ${q(p.language)}, ${q(p.onboardedAt)}, ${q(p.riskAcceptedAt)}, ${q(p.createdAt)}) on conflict (id) do update set username = excluded.username;`,
+      `insert into public.profiles (id, username, display_name, bio, country_code, birth_year, interests, holdings_public, share_exact_amounts, tier, kyc_status, language, onboarded_at, risk_accepted_at, created_at) values (${q(id)}, ${q(p.username)}, ${q(p.displayName)}, ${q(p.bio)}, ${q(p.countryCode)}, ${p.birthYear ?? 'null'}, ${arr(p.interests)}, ${p.holdingsPublic}, ${p.shareExactAmounts}, ${q(p.tier)}, 'approved', ${q(p.language)}, ${q(p.onboardedAt)}, ${q(p.riskAcceptedAt)}, ${q(p.createdAt)}) on conflict (id) do update set ${PROFILE_UPSERT};`,
     );
   }
   for (const f of db.follows) {

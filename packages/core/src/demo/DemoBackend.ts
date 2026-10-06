@@ -633,6 +633,13 @@ export class DemoBackend implements Backend {
       next.bio = patch.bio.slice(0, 160);
     }
     if (patch.avatarUrl !== undefined) next.avatarUrl = patch.avatarUrl;
+    // Region and birth year are locked after onboarding (mirrors the profiles_guard trigger).
+    const locked =
+      me.onboardedAt !== null &&
+      ((patch.countryCode !== undefined && patch.countryCode.toUpperCase() !== me.countryCode) ||
+        (patch.birthYear !== undefined && patch.birthYear !== me.birthYear));
+    if (locked)
+      throw new AppError('invalid_input', 'Region and birth year are locked after onboarding.');
     if (patch.countryCode !== undefined) next.countryCode = patch.countryCode.toUpperCase();
     if (patch.birthYear !== undefined) {
       if (!isAdult(patch.birthYear, new Date(this.now())))

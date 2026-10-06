@@ -244,6 +244,10 @@ describe('DemoBackend happy path', () => {
       riskAccepted: true,
     });
     await backend.completeOnboarding();
+    // Switching region after onboarding can't be used to unlock features.
+    await expect(backend.updateProfile({ countryCode: 'ID' })).rejects.toMatchObject({
+      code: 'invalid_input',
+    });
     const q = await backend.quoteSpot({
       assetId: 'tslax',
       side: 'buy',

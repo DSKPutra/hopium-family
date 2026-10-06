@@ -4,15 +4,6 @@
 create extension if not exists citext;
 create extension if not exists pgcrypto;
 
--- ─── helpers ────────────────────────────────────────────────────────────────
-create or replace function public.is_blocked(a uuid, b uuid) returns boolean
-language sql stable security definer set search_path = public as $$
-  select exists (
-    select 1 from public.blocks
-    where (blocker_id = a and blocked_id = b) or (blocker_id = b and blocked_id = a)
-  );
-$$;
-
 -- ─── profiles ───────────────────────────────────────────────────────────────
 create table public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
@@ -57,6 +48,15 @@ create table public.blocks (
   check (blocker_id <> blocked_id)
 );
 alter table public.blocks enable row level security;
+
+-- Defined after public.blocks: SQL function bodies are validated at creation.
+create or replace function public.is_blocked(a uuid, b uuid) returns boolean
+language sql stable security definer set search_path = public as $$
+  select exists (
+    select 1 from public.blocks
+    where (blocker_id = a and blocked_id = b) or (blocker_id = b and blocked_id = a)
+  );
+$$;
 
 -- ─── wallets & assets ───────────────────────────────────────────────────────
 create table public.wallets (

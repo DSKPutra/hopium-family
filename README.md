@@ -112,6 +112,7 @@ Sign in with any email. In demo mode **any 6-digit code works**. You start with 
 | `npm test` | Jest: core math, providers, DemoBackend, i18n parity, banned phrases, legal sync, components |
 | `npm run test:coverage` | Jest with coverage (trading math threshold ≥ 95%) |
 | `npm run test:functions` | Deno tests for the edge functions |
+| `npm run test:db` | Applies all migrations + `seed.sql` to a scratch Postgres and runs the RLS / column-privilege assertions in `supabase/tests/rls_test.sql` (needs `psql` and `DATABASE_URL`; no Docker) |
 | `npm run e2e:web` | Playwright happy path on mobile + desktop web (run `npm run export:web` first) |
 | `npm run e2e:mobile` | Maestro flow (requires a running simulator/emulator build) |
 | `npm run export:web` | Static SPA export to `apps/mobile/dist`, plus prerendered share pages and OG cards (`scripts/prerender-web.ts`; set `SITE_URL` for non-production hosts) |
@@ -213,7 +214,7 @@ The export is a single-page app (`web.output: "single"`), because routing and st
 - [ ] Replace universal-link placeholders (Team ID, Android cert SHA-256)
 - [ ] Enable Sentry and PostHog; verify no PII in events
 - [ ] Store review notes: demo credentials (any email + any 6-digit code in demo builds), explain tokenized exposure and region gating
-- [ ] Penetration test and RLS review (see `supabase/migrations/0002_policies.sql`)
+- [ ] Penetration test and RLS review (`0002_policies.sql` row policies, `0006_column_privileges.sql` column grants; `npm run test:db` covers the basics)
 
 ## Troubleshooting
 

@@ -115,7 +115,7 @@ returns setof public.activity language sql stable set search_path = public as $$
 $$;
 
 create or replace function public.portfolio_history(p_user uuid, p_range text)
-returns table (time timestamptz, value numeric) language sql stable set search_path = public as $$
+returns table ("time" timestamptz, value numeric) language sql stable set search_path = public as $$
   select s.created_at, s.value from public.portfolio_snapshots s
   where s.user_id = p_user
     and (p_user = auth.uid() or exists (select 1 from public.profiles p where p.id = p_user and p.holdings_public))

@@ -2,7 +2,7 @@
   "name": "hopium-family",
   "private": true,
   "version": "1.0.0",
-  "description": "hopium.family — social trading super-app (web + iOS + Android, one codebase)",
+  "description": "hopium.family \u2014 social trading super-app (web + iOS + Android, one codebase)",
   "workspaces": [
     "apps/*",
     "packages/*"
@@ -25,7 +25,8 @@
     "seed:sql": "tsx scripts/seed-demo.ts",
     "e2e:web": "playwright test",
     "e2e:mobile": "maestro test e2e/maestro/happy-path.yaml",
-    "test:functions": "npx --yes deno@2 test --allow-env --allow-net=api.coingecko.com,api.hyperliquid.xyz --config supabase/functions/deno.json supabase/functions"
+    "test:functions": "npx --yes deno@2 test --allow-env --allow-net=api.coingecko.com,api.hyperliquid.xyz --config supabase/functions/deno.json supabase/functions",
+    "test:db": "bash scripts/test-db.sh"
   },
   "engines": {
     "node": ">=20.19"
