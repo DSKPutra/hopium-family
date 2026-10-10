@@ -144,7 +144,7 @@ export default function TradeHub() {
               </Text>
               <View className="items-end">
                 <Text variant="small" numeric>
-                  {f.usd(tr.notional)}
+                  {f.money(tr.notional)}
                 </Text>
                 <Text variant="micro" tone="muted">
                   {timeAgo(t, tr.createdAt)}

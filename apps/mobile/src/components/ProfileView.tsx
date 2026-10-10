@@ -318,7 +318,7 @@ export function ProfileView({ username, own = false }: { username: string; own?:
                     </View>
                     <View className="items-end">
                       <Text variant="small" numeric>
-                        {tr.notional === '0' ? t('feed.private') : f.usd(tr.notional)}
+                        {tr.notional === '0' ? t('feed.private') : f.money(tr.notional)}
                       </Text>
                       <Text variant="micro" tone="muted" numeric>
                         @ {f.price(tr.price)}

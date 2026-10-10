@@ -1,5 +1,5 @@
 import { Button, IconButton, Text, useTheme, useToast } from '@hopium/ui';
-import { router, useLocalSearchParams } from 'expo-router';
+import { router } from 'expo-router';
 import { ArrowLeft } from 'lucide-react-native';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +10,7 @@ import { Seo } from '@/components/Seo';
 import { useServices } from '@/hooks/useServices';
 import { isDemo } from '@/lib/env';
 import { errorMessage } from '@/lib/errors';
+import { useUi } from '@/stores/ui';
 
 const LENGTH = 6;
 
@@ -18,11 +19,16 @@ export default function VerifyOtp() {
   const { colors } = useTheme();
   const toast = useToast();
   const { backend } = useServices();
-  const { email = '' } = useLocalSearchParams<{ email: string }>();
+  const email = useUi((s) => s.pendingEmail);
   const [digits, setDigits] = useState<string[]>(Array(LENGTH).fill(''));
   const [busy, setBusy] = useState(false);
   const [cooldown, setCooldown] = useState(30);
   const refs = useRef<(TextInput | null)[]>([]);
+
+  // A reload loses the in-memory email: start over rather than verify nothing.
+  useEffect(() => {
+    if (!email) router.replace('/sign-in');
+  }, [email]);
 
   useEffect(() => {
     if (cooldown <= 0) return;
@@ -44,7 +50,10 @@ export default function VerifyOtp() {
   };
 
   const onChange = (index: number, text: string) => {
-    const clean = text.replace(/\D/g, '');
+    let clean = text.replace(/\D/g, '');
+    // Typing into a filled box (cursor not selecting) yields old + new digit.
+    const prev = digits[index];
+    if (clean.length === 2 && prev && clean.includes(prev)) clean = clean.replace(prev, '');
     if (clean.length > 1) {
       // Paste support: spread across boxes.
       const next = clean.slice(0, LENGTH).split('');
@@ -96,7 +105,9 @@ export default function VerifyOtp() {
                 inputMode="numeric"
                 textContentType="oneTimeCode"
                 autoComplete={i === 0 ? 'one-time-code' : 'off'}
-                maxLength={i === 0 ? LENGTH : 1}
+                // Every box accepts a full pasted code; onChange spreads it.
+                maxLength={LENGTH}
+                selectTextOnFocus
                 autoFocus={i === 0}
                 accessibilityLabel={t('auth.otp.digit', { index: i + 1 })}
                 selectionColor={colors.primary}

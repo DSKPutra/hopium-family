@@ -58,7 +58,7 @@ export function RightRail() {
                   numeric
                   tone={p.unrealizedPnl.startsWith('-') ? 'loss' : 'gain'}
                 >
-                  {f.usd(p.unrealizedPnl, { signed: true })}
+                  {f.money(p.unrealizedPnl, { signed: true })}
                 </Text>
               </Pressable>
             ))

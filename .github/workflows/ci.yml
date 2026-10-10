@@ -24,6 +24,8 @@ jobs:
         run: npm run typecheck
       - name: Lint
         run: npm run lint
+      - name: Formatting
+        run: npx prettier --check .
       - name: Unit & component tests
         run: npm test -- --ci
       - name: Legal documents are up to date

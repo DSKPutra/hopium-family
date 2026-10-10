@@ -83,7 +83,7 @@ function TradeBody({ item }: { item: FeedItem }) {
         </Text>
         <Text variant="small" tone="muted" numeric>
           {item.amountsVisible
-            ? f.usd(trade.notional)
+            ? f.money(trade.notional)
             : item.sizeBucket
               ? t(`feed.size.${item.sizeBucket}`)
               : ''}{' '}

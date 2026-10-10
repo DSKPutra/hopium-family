@@ -13,7 +13,10 @@ Deno.serve(
     await rateLimit(admin, user.id, 'delete-account', 3);
     deleteSchema.parse(await req.json());
     await admin.from('trades').update({ user_id: null, is_public: false }).eq('user_id', user.id);
-    await admin.storage.from('avatars').remove([`${user.id}.jpg`]).catch(() => undefined);
+    await admin.storage
+      .from('avatars')
+      .remove([`${user.id}.jpg`])
+      .catch(() => undefined);
     const { error } = await admin.auth.admin.deleteUser(user.id);
     if (error) throw new Error(error.message);
     return json({ deleted: true });

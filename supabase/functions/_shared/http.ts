@@ -9,7 +9,10 @@ export const corsHeaders = {
 };
 
 export function json(body: unknown, status = 200): Response {
-  return new Response(JSON.stringify(body), { status, headers: { ...corsHeaders, 'content-type': 'application/json' } });
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { ...corsHeaders, 'content-type': 'application/json' },
+  });
 }
 
 const STATUS: Record<string, number> = {
@@ -35,19 +38,29 @@ const STATUS: Record<string, number> = {
 
 /** Maps any thrown error to `{ code, message }` without leaking internals. */
 export function errorResponse(err: unknown): Response {
-  if (err instanceof ZodError) return json({ code: 'invalid_input', message: err.issues[0]?.message ?? 'Invalid input' }, 400);
+  if (err instanceof ZodError)
+    return json({ code: 'invalid_input', message: err.issues[0]?.message ?? 'Invalid input' }, 400);
   const e = toAppError(err);
   const status = STATUS[e.code] ?? 500;
-  return json({ code: e.code, message: status === 500 ? 'Something went wrong. Please try again.' : e.message }, status);
+  return json(
+    {
+      code: e.code,
+      message: status === 500 ? 'Something went wrong. Please try again.' : e.message,
+    },
+    status,
+  );
 }
 
-export function handler(fn: (req: Request) => Promise<Response>): (req: Request) => Promise<Response> {
+export function handler(
+  fn: (req: Request) => Promise<Response>,
+): (req: Request) => Promise<Response> {
   return async (req) => {
     if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
     try {
       return await fn(req);
     } catch (err) {
-      if (!(err instanceof AppError) && !(err instanceof ZodError)) console.error('[edge]', err instanceof Error ? err.message : err);
+      if (!(err instanceof AppError) && !(err instanceof ZodError))
+        console.error('[edge]', err instanceof Error ? err.message : err);
       return errorResponse(err);
     }
   };

@@ -274,7 +274,7 @@ export default function AssetDetail() {
               </Text>
               <PnLBadge
                 pct={holding.data.unrealizedPnlPct}
-                amount={f.usd(holding.data.unrealizedPnl, { signed: true })}
+                amount={f.money(holding.data.unrealizedPnl, { signed: true })}
                 locale={f.locale}
                 size="md"
               />

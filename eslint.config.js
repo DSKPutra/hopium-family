@@ -36,7 +36,13 @@ module.exports = defineConfig([
   {
     files: ['**/*.config.js', '**/babel.config.js', 'scripts/**'],
     languageOptions: {
-      globals: { __dirname: 'readonly', require: 'readonly', module: 'writable', process: 'readonly', console: 'readonly' },
+      globals: {
+        __dirname: 'readonly',
+        require: 'readonly',
+        module: 'writable',
+        process: 'readonly',
+        console: 'readonly',
+      },
     },
     rules: { 'no-console': 'off' },
   },

@@ -11,7 +11,7 @@ import { AppState, Platform } from 'react-native';
 
 import { env, useSupabase } from './env';
 import { kv } from './storage';
-import { SupabaseBackend } from './supabaseBackend';
+import type { SupabaseBackend } from './supabaseBackend';
 
 export interface Services {
   backend: Backend;
@@ -24,6 +24,7 @@ export interface Services {
 const DEMO_KEY = 'hopium.demo.state.v3';
 
 let services: Services | null = null;
+let supabase: SupabaseBackend | null = null;
 
 async function openBrowser(url: string): Promise<'completed' | 'cancelled'> {
   const res = await WebBrowser.openAuthSessionAsync(url, 'hopium://');
@@ -51,18 +52,22 @@ export function getServices(): Services {
     },
     fetch: (input, init) => fetch(input, init),
     openBrowser,
-    authHeader: async () =>
-      services?.backend instanceof SupabaseBackend ? services.backend.authHeader() : {},
+    authHeader: async () => (supabase ? supabase.authHeader() : {}),
     resolveToken: (assetId) => ({ address: assetId, decimals: 6 }),
   });
   let backend: Backend;
   let demo: DemoBackend | null = null;
-  if (useSupabase) {
-    backend = new SupabaseBackend({
+  // The literal env check lets production bundles drop the Supabase client
+  // entirely from demo builds (EXPO_PUBLIC_* values are inlined at build time).
+  if (process.env.EXPO_PUBLIC_APP_MODE === 'live' && useSupabase) {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports -- conditional require keeps Supabase out of demo bundles
+    const mod = require('./supabaseBackend') as typeof import('./supabaseBackend');
+    supabase = new mod.SupabaseBackend({
       url: env.supabaseUrl,
       anonKey: env.supabaseAnonKey,
       providers,
     });
+    backend = supabase;
   } else {
     demo = new DemoBackend(mock, {
       storage: {

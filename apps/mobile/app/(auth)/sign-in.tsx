@@ -10,12 +10,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Seo } from '@/components/Seo';
 import { useServices } from '@/hooks/useServices';
 import { errorMessage, validationMessage } from '@/lib/errors';
+import { useUi } from '@/stores/ui';
 
 export default function SignIn() {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const toast = useToast();
   const { backend } = useServices();
+  const setPendingEmail = useUi((s) => s.setPendingEmail);
   const [email, setEmail] = useState('');
   const [touched, setTouched] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -29,7 +31,8 @@ export default function SignIn() {
     setBusy(true);
     try {
       await backend.startEmailSignIn(parsed.data);
-      router.push({ pathname: '/verify-otp', params: { email: parsed.data } });
+      setPendingEmail(parsed.data);
+      router.push('/verify-otp');
     } catch (err) {
       toast.show(errorMessage(t, err), 'error');
     } finally {

@@ -12,7 +12,7 @@ appId: family.hopium.app
     id: send-code
 - tapOn:
     id: otp-0
-- inputText: "123456"
+- inputText: '123456'
 - tapOn:
     id: username-input
 - inputRandomText:
@@ -31,7 +31,7 @@ appId: family.hopium.app
 - tapOn: Indonesia
 - tapOn:
     id: birth-year-input
-- inputText: "1995"
+- inputText: '1995'
 - tapOn:
     id: onboarding-next
 - scrollUntilVisible:

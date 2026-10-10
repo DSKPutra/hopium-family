@@ -98,7 +98,7 @@ export function PositionRow({
         <View className="flex-1" />
         <PnLBadge
           pct={position.roePct}
-          amount={f.usd(position.unrealizedPnl, { signed: true })}
+          amount={f.money(position.unrealizedPnl, { signed: true })}
           locale={f.locale}
           size="md"
         />
@@ -117,7 +117,7 @@ export function PositionRow({
         <Cell label={t('perps.liqPriceShort')} value={f.price(position.liqPrice)} tone="warning" />
         <Cell
           label={t('perps.pnl')}
-          value={f.usd(position.unrealizedPnl, { signed: true })}
+          value={f.money(position.unrealizedPnl, { signed: true })}
           tone={up ? 'gain' : 'loss'}
         />
         <Cell

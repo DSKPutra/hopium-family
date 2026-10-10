@@ -1,6 +1,12 @@
 import { z } from 'zod';
 import { AppError } from '@hopium/core/errors';
-import { assertLeverage, assertTpSl, isHighLeverage, liquidationPrice, sizeFromMargin } from '@hopium/core/trading/perps';
+import {
+  assertLeverage,
+  assertTpSl,
+  isHighLeverage,
+  liquidationPrice,
+  sizeFromMargin,
+} from '@hopium/core/trading/perps';
 import { gt } from '@hopium/core/money';
 
 const decimal = z.string().regex(/^\d+(\.\d+)?$/);
@@ -25,10 +31,18 @@ export interface MarketRules {
 export function preparePerp(input: z.infer<typeof openPerpSchema>, market: MarketRules) {
   assertLeverage(input.leverage, market.maxLeverage);
   if (isHighLeverage(input.leverage) && !input.acknowledgedHighLeverage) {
-    throw new AppError('high_leverage_unacknowledged', 'Please acknowledge the high-leverage risk.');
+    throw new AppError(
+      'high_leverage_unacknowledged',
+      'Please acknowledge the high-leverage risk.',
+    );
   }
   if (!gt(input.marginUsd, 0)) throw new AppError('invalid_amount');
-  const liqPrice = liquidationPrice(input.side, market.markPrice, input.leverage, market.maintenanceMarginRate);
+  const liqPrice = liquidationPrice(
+    input.side,
+    market.markPrice,
+    input.leverage,
+    market.maintenanceMarginRate,
+  );
   assertTpSl({ side: input.side, entry: market.markPrice, liqPrice, tp: input.tp, sl: input.sl });
   return { size: sizeFromMargin(input.marginUsd, input.leverage, market.markPrice), liqPrice };
 }

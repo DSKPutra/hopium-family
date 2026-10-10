@@ -2,10 +2,10 @@ appId: family.hopium.app
 ---
 - tapOn:
     id: thesis-target
-- inputText: "1"
+- inputText: '1'
 - tapOn:
     id: thesis-invalidation
-- inputText: "0.001"
+- inputText: '0.001'
 - tapOn:
     id: thesis-body
 - inputText: fam season is loading. community keeps growing every week.

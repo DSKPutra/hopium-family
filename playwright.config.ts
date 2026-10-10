@@ -16,7 +16,10 @@ export default defineConfig({
   },
   projects: [
     { name: 'mobile-web', use: { ...devices['Pixel 7'] } },
-    { name: 'desktop-web', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
+    {
+      name: 'desktop-web',
+      use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } },
+    },
   ],
   webServer: {
     command: 'node scripts/serve-dist.js 4173',

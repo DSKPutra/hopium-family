@@ -85,7 +85,7 @@ export default function Positions() {
                     tone={p.realizedPnl.startsWith('-') ? 'loss' : 'gain'}
                   >
                     {p.realizedPnl.startsWith('-') ? '▼ ' : '▲ '}
-                    {f.usd(p.realizedPnl, { signed: true })}
+                    {f.money(p.realizedPnl, { signed: true })}
                   </Text>
                 </View>
               ))}

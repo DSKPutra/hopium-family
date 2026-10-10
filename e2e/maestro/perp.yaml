@@ -3,15 +3,15 @@ appId: family.hopium.app
 - tapOn:
     id: perp-margin
 - eraseText
-- inputText: "100"
+- inputText: '100'
 - tapOn:
     id: tick-3
 - tapOn:
     id: perp-tp
-- inputText: "10000"
+- inputText: '10000'
 - tapOn:
     id: perp-sl
-- inputText: "1"
+- inputText: '1'
 - tapOn:
     id: perp-open
 - extendedWaitUntil:

@@ -95,13 +95,13 @@ hopium-family/
 ```bash
 npm install
 npm run web        # http://localhost:8081
-npm run ios        # iOS simulator (development build recommended)
-npm run android    # Android emulator
+npm run ios        # builds + runs a development build on the iOS simulator (needs Xcode)
+npm run android    # builds + runs a development build on an Android emulator/device (needs Android SDK, JDK 17)
 ```
 
 Sign in with any email. In demo mode **any 6-digit code works**. You start with **$10,000 demo USDC** plus a couple of small bags, and 50 simulated traders keep the feed moving.
 
-> Native modules (MMKV, camera, biometrics, notifications) need a development build: `npx expo run:ios` or `eas build --profile development`. In Expo Go the app falls back to in-memory storage.
+> Native modules (MMKV, camera, biometrics, notifications) need a development build, which is what `npm run ios/android` (`expo run:*`) produce; `eas build --profile development` builds one in the cloud. The first local Android build is slow (Gradle compiles every native module) and an emulator needs roughly 4 GB of free RAM. In Expo Go the app falls back to in-memory storage.
 
 ## Scripts
 

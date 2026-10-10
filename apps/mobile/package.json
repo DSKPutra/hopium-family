@@ -81,7 +81,7 @@
     "ios": "expo run:ios",
     "android": "expo run:android",
     "lint": "expo lint",
-    "export:web": "expo export --platform web && node ../../scripts/postexport.js && tsx ../../scripts/prerender-web.ts",
+    "export:web": "EXPO_UNSTABLE_METRO_OPTIMIZE_GRAPH=1 EXPO_UNSTABLE_TREE_SHAKING=1 expo export --platform web && node ../../scripts/postexport.js && tsx ../../scripts/prerender-web.ts",
     "doctor": "expo-doctor"
   },
   "private": true
