@@ -270,7 +270,43 @@ async function main(): Promise<void> {
         pageHtml(page.title, page.description, path, page.image),
       );
   }
-  console.log(`✓ prerendered ${pages.length} share pages`);
+  // Crawlers: public pages only (app screens behind sign-in are disallowed).
+  const today = new Date().toISOString().slice(0, 10);
+  const urls = [
+    '/welcome',
+    '/legal/terms',
+    '/legal/privacy',
+    '/legal/risk',
+    ...pages.map((p) => p.paths[0]),
+  ];
+  write(
+    join(dist, 'sitemap.xml'),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls
+      .map((u) => `  <url><loc>${SITE}${u}</loc><lastmod>${today}</lastmod></url>`)
+      .join('\n')}\n</urlset>\n`,
+  );
+  write(
+    join(dist, 'robots.txt'),
+    [
+      'User-agent: *',
+      'Allow: /',
+      ...[
+        '/settings',
+        '/wallet',
+        '/notifications',
+        '/orders',
+        '/positions',
+        '/onboarding',
+        '/sign-in',
+        '/verify-otp',
+        '/dev',
+      ].map((p) => `Disallow: ${p}`),
+      '',
+      `Sitemap: ${SITE}/sitemap.xml`,
+      '',
+    ].join('\n'),
+  );
+  console.log(`✓ prerendered ${pages.length} share pages, sitemap.xml and robots.txt`);
 }
 
 main().catch((err: unknown) => {

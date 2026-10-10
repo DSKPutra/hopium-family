@@ -4,6 +4,10 @@ import { isValidAddress } from './chains';
 import { gt, isValidDecimal, lte } from './money';
 import { CHAINS, INTERESTS } from './types';
 
+// zod v4 probes `new Function` to enable its JIT; the web CSP forbids eval, so
+// the probe would log a violation. Validation is identical without the JIT.
+z.config({ jitless: true });
+
 export const RESERVED_USERNAMES = [
   'admin',
   'hopium',
