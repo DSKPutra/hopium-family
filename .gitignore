@@ -38,9 +38,11 @@ yarn-error.*
 
 example
 
-# generated native folders
+# generated native folders (Continuous Native Generation: expo prebuild)
 /ios
 /android
+apps/mobile/ios/
+apps/mobile/android/
 
 # env
 .env
