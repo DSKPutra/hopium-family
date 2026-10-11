@@ -106,16 +106,26 @@
       "invalidChars": "Gunakan huruf kecil, angka, dan garis bawah saja.",
       "reserved": "Username itu dicadangkan."
     },
-    "email": { "invalid": "Masukkan alamat email yang valid." },
-    "otp": { "invalid": "Masukkan kode 6 digit." },
+    "email": {
+      "invalid": "Masukkan alamat email yang valid."
+    },
+    "otp": {
+      "invalid": "Masukkan kode 6 digit."
+    },
     "profile": {
       "nameRequired": "Tambahkan nama tampilan.",
       "nameTooLong": "Maksimal 40 karakter.",
       "bioTooLong": "Maksimal 160 karakter."
     },
-    "interests": { "pickOne": "Pilih minimal satu." },
-    "birthYear": { "invalid": "Masukkan tahun yang valid." },
-    "country": { "invalid": "Pilih negara." },
+    "interests": {
+      "pickOne": "Pilih minimal satu."
+    },
+    "birthYear": {
+      "invalid": "Masukkan tahun yang valid."
+    },
+    "country": {
+      "invalid": "Pilih negara."
+    },
     "amount": {
       "invalid": "Masukkan jumlah yang valid.",
       "positive": "Jumlah harus lebih dari nol.",
@@ -133,7 +143,10 @@
       "target_wrong_side": "Target harus di atas harga masuk untuk long dan di bawah harga masuk untuk short.",
       "invalidation_wrong_side": "Invalidasi harus di bawah harga masuk untuk long dan di atas harga masuk untuk short."
     },
-    "comment": { "empty": "Tulis sesuatu dulu.", "tooLong": "Maksimal 500 karakter." }
+    "comment": {
+      "empty": "Tulis sesuatu dulu.",
+      "tooLong": "Maksimal 500 karakter."
+    }
   },
   "auth": {
     "welcome": {
@@ -336,6 +349,8 @@
     "hint": "coba $HOPE, AAPLx, atau username"
   },
   "asset": {
+    "priceLive": "harga pasar live · CoinGecko",
+    "priceSimulated": "harga simulasi · token demo",
     "shareMessage": "{{symbol}} di hopium.family",
     "watch": "Tambah ke pantauan",
     "unwatch": "Hapus dari pantauan",
@@ -690,9 +705,18 @@
       "title": "status legend terbuka",
       "body": "{{icon}} kamu dapat badge baru. cek profilmu."
     },
-    "comment": { "title": "komentar baru", "body": "@{{username}} mengomentari postinganmu." },
-    "like": { "title": "suka baru", "body": "@{{username}} menyukai postinganmu." },
-    "follow": { "title": "pengikut baru", "body": "@{{username}} mulai mengikutimu." },
+    "comment": {
+      "title": "komentar baru",
+      "body": "@{{username}} mengomentari postinganmu."
+    },
+    "like": {
+      "title": "suka baru",
+      "body": "@{{username}} menyukai postinganmu."
+    },
+    "follow": {
+      "title": "pengikut baru",
+      "body": "@{{username}} mulai mengikutimu."
+    },
     "orderFilled": {
       "title": "order terisi",
       "body": "Order {{side}} {{symbol}} kamu sudah terisi."
@@ -706,21 +730,39 @@
       "title": "Posisi terlikuidasi",
       "body": "Posisi {{market}} kamu terlikuidasi di harga likuidasinya."
     },
-    "tpHit": { "title": "Take-profit terisi" },
-    "slHit": { "title": "Stop-loss terisi" },
-    "tpslHit": { "body": "Posisi {{market}} kamu sudah ditutup." },
+    "tpHit": {
+      "title": "Take-profit terisi"
+    },
+    "slHit": {
+      "title": "Stop-loss terisi"
+    },
+    "tpslHit": {
+      "body": "Posisi {{market}} kamu sudah ditutup."
+    },
     "liquidationRisk": {
       "title": "Risiko likuidasi",
       "body": "Posisi {{market}} kamu mendekati estimasi harga likuidasi."
     },
-    "deposit": { "title": "dana masuk", "body": "{{amount}} USDC sudah masuk ke dompetmu." },
+    "deposit": {
+      "title": "dana masuk",
+      "body": "{{amount}} USDC sudah masuk ke dompetmu."
+    },
     "thesis": {
-      "hit": { "title": "tesis tercapai 🎯" },
-      "invalidated": { "title": "Tesis tidak valid" },
-      "expired": { "title": "Tesis kedaluwarsa" },
+      "hit": {
+        "title": "tesis tercapai 🎯"
+      },
+      "invalidated": {
+        "title": "Tesis tidak valid"
+      },
+      "expired": {
+        "title": "Tesis kedaluwarsa"
+      },
       "body": "Tesis {{symbol}} kamu sudah selesai."
     },
-    "rankUp": { "title": "naik peringkat", "body": "kamu naik. peringkat #{{rank}} 🚀" },
+    "rankUp": {
+      "title": "naik peringkat",
+      "body": "kamu naik. peringkat #{{rank}} 🚀"
+    },
     "priceAlert": {
       "title": "alert harga",
       "above": "{{symbol}} di atas {{value}}.",
@@ -852,5 +894,25 @@
     "asset": "Harga & trade {{symbol}}",
     "user": "@{{username}} di hopium.family",
     "thesis": "Tesis {{direction}} {{symbol}} oleh @{{username}}"
+  },
+  "getApp": {
+    "title": "pasang aplikasinya",
+    "body": "pasang hopium.family di HP kamu — terbuka layar penuh seperti aplikasi lain.",
+    "alreadyTitle": "kamu sudah pakai aplikasinya ✓",
+    "alreadyBody": "hopium.family sudah terpasang di perangkat ini.",
+    "androidTitle": "Android",
+    "installButton": "pasang aplikasi",
+    "androidMenu": "Di Chrome, buka menu ⋮ lalu ketuk \"Instal aplikasi\" (atau \"Tambahkan ke layar utama\").",
+    "apkButton": "unduh aplikasi Android (APK)",
+    "apkNote": "Build demo yang ditandatangani untuk pengujian. Android akan meminta izin instal dari browser saat pertama kali.",
+    "iosTitle": "iPhone & iPad",
+    "iosStep1": "Buka hopium.family di Safari.",
+    "iosStep2": "Ketuk tombol Bagikan",
+    "iosStep3": "Pilih \"Tambah ke Layar Utama\", lalu \"Tambah\".",
+    "iosNote": "Apple hanya mengizinkan aplikasi App Store terpasang secara native; aplikasi layar utama menjalankan hopium.family yang sama dalam layar penuh.",
+    "scanTitle": "buka di HP?",
+    "scanBody": "Pindai untuk membuka halaman ini di HP kamu.",
+    "installed": "terpasang. cari hopium di layar utama 🫶",
+    "link": "pasang aplikasinya"
   }
 }

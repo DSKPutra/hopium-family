@@ -10,6 +10,7 @@ import {
   Palette,
   Shield,
   ShieldCheck,
+  Smartphone,
   Trash2,
   User,
 } from 'lucide-react-native';
@@ -83,6 +84,12 @@ export default function Settings() {
         />
       </SettingsGroup>
       <SettingsGroup title={t('settings.support')}>
+        <SettingsRow
+          testID="settings-get-app"
+          icon={icon(Smartphone)}
+          label={t('getApp.link')}
+          onPress={() => router.push('/get-app')}
+        />
         <SettingsRow
           icon={icon(FileText)}
           label={t('settings.legal')}

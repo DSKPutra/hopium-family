@@ -20,6 +20,8 @@ interface AssetState {
   open24h: Decimal;
   anchor: number;
   trendScore: number;
+  /** Anchored to a real market price (see LivePriceFeed). */
+  live: boolean;
 }
 
 const RANGE_SPEC: Record<CandleRange, { count: number; stepMs: number }> = {
@@ -77,6 +79,7 @@ export class MockMarketData implements MarketDataProvider {
         open24h,
         anchor: dec(price).toNumber(),
         trendScore: r() * (entry.tags.includes('meme') ? 2 : 1),
+        live: false,
       });
       this.bySymbol.set(entry.symbol.toLowerCase(), entry.id);
     }
@@ -99,9 +102,13 @@ export class MockMarketData implements MarketDataProvider {
     const stepSigmaScale = Math.sqrt(this.tickMs / 86_400_000) * this.boost;
     for (const state of this.states.values()) {
       if (state.entry.dailyVol === 0 || this.rng() > 0.7) continue;
-      const sigma = state.entry.dailyVol * stepSigmaScale;
+      // Live-anchored assets only jitter around the last real price between
+      // feed updates; fictional tokens get the boosted demo volatility.
+      const sigma = state.live
+        ? state.entry.dailyVol * Math.sqrt(this.tickMs / 86_400_000)
+        : state.entry.dailyVol * stepSigmaScale;
       const current = dec(state.price).toNumber();
-      const reversion = -0.004 * Math.log(current / state.anchor);
+      const reversion = (state.live ? -0.2 : -0.004) * Math.log(current / state.anchor);
       const logReturn = sigma * gaussian(this.rng) + reversion;
       state.price = roundPrice(mul(state.price, Math.exp(logReturn).toFixed(12)));
       const tick: PriceTick = {
@@ -167,6 +174,7 @@ export class MockMarketData implements MarketDataProvider {
       underlyingName: entry.underlyingName,
       listedAt: new Date(this.now() - entry.listedDaysAgo * 86_400_000).toISOString(),
       holders: Math.round(1000 + r() * (entry.tags.includes('blue-chip') ? 5_000_000 : 180_000)),
+      priceSource: state.live ? 'live' : 'simulated',
     };
   }
 
@@ -325,6 +333,29 @@ export class MockMarketData implements MarketDataProvider {
         s.open24h = str(p.open24h);
       }
     }
+  }
+
+  /**
+   * Snap an asset to a real market price and its real 24h change; later ticks
+   * stay close to it. Returns false for unknown assets or unusable prices.
+   */
+  anchorPrice(assetId: string, price: number, change24hPct: number): boolean {
+    const s = this.states.get(assetId);
+    if (!s || !Number.isFinite(price) || price <= 0) return false;
+    const next = roundPrice(price.toString());
+    const change = Number.isFinite(change24hPct) && change24hPct > -99 ? change24hPct : 0;
+    s.price = next;
+    s.open24h = roundPrice(div(next, (1 + change / 100).toFixed(12)));
+    s.anchor = price;
+    s.live = true;
+    const tick: PriceTick = {
+      assetId,
+      price: next,
+      change24hPct: this.change(s),
+      time: this.now(),
+    };
+    for (const sub of this.subscribers) if (!sub.ids || sub.ids.has(assetId)) sub.cb(tick);
+    return true;
   }
 
   /** Test/demo helper: force a price (e.g. to trigger liquidation). */

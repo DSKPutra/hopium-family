@@ -16,6 +16,7 @@ import { DesktopShell } from '@/components/desktop/DesktopShell';
 import { NotificationPrimer } from '@/components/NotificationPrimer';
 import { Seo } from '@/components/Seo';
 import { useMe, useSession } from '@/hooks/queries';
+import { registerServiceWorker } from '@/lib/pwa';
 import { AppProviders } from '@/providers/AppProviders';
 
 void SplashScreen.preventAutoHideAsync().catch(() => undefined);
@@ -32,6 +33,8 @@ function RootNavigator({ fontsLoaded }: { fontsLoaded: boolean }) {
   useEffect(() => {
     if (ready) void SplashScreen.hideAsync().catch(() => undefined);
   }, [ready]);
+  // Web: installable app shell + offline fallback (no-op on native).
+  useEffect(() => registerServiceWorker(), []);
 
   const navTheme = useMemo(() => {
     const base = scheme === 'dark' ? DarkTheme : DefaultTheme;
@@ -85,6 +88,7 @@ function RootNavigator({ fontsLoaded }: { fontsLoaded: boolean }) {
             <Stack.Screen name="t/[id]" />
           </Stack.Protected>
           <Stack.Screen name="legal/[doc]" />
+          <Stack.Screen name="get-app" />
           <Stack.Screen name="+not-found" />
         </Stack>
       </DesktopShell>

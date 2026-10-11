@@ -1,6 +1,7 @@
 import {
   createProviders,
   DemoBackend,
+  LivePriceFeed,
   type Backend,
   type MarketDataProvider,
   type MockProviders,
@@ -19,6 +20,8 @@ export interface Services {
   mock: MockProviders;
   market: MarketDataProvider;
   demo: DemoBackend | null;
+  /** Real-price anchor for the demo market (null when disabled or live mode). */
+  livePrices: LivePriceFeed | null;
 }
 
 const DEMO_KEY = 'hopium.demo.state.v3';
@@ -57,6 +60,7 @@ export function getServices(): Services {
   });
   let backend: Backend;
   let demo: DemoBackend | null = null;
+  let livePrices: LivePriceFeed | null = null;
   // The literal env check lets production bundles drop the Supabase client
   // entirely from demo builds (EXPO_PUBLIC_* values are inlined at build time).
   if (process.env.EXPO_PUBLIC_APP_MODE === 'live' && useSupabase) {
@@ -78,8 +82,16 @@ export function getServices(): Services {
     });
     backend = demo;
     flushOnExit(demo);
+    // Real market prices (CoinGecko, free, no key) for real assets; trading stays simulated.
+    if (process.env.EXPO_PUBLIC_LIVE_PRICES !== 'off') {
+      livePrices = new LivePriceFeed({
+        market: mock.marketData,
+        fetch: (input, init) => fetch(input, init),
+      });
+      livePrices.start();
+    }
   }
-  services = { backend, providers, mock, market: providers.marketData, demo };
+  services = { backend, providers, mock, market: providers.marketData, demo, livePrices };
   return services;
 }
 

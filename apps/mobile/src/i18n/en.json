@@ -106,16 +106,26 @@
       "invalidChars": "Use lowercase letters, numbers and underscores only.",
       "reserved": "That username is reserved."
     },
-    "email": { "invalid": "Enter a valid email address." },
-    "otp": { "invalid": "Enter the 6-digit code." },
+    "email": {
+      "invalid": "Enter a valid email address."
+    },
+    "otp": {
+      "invalid": "Enter the 6-digit code."
+    },
     "profile": {
       "nameRequired": "Add a display name.",
       "nameTooLong": "40 characters max.",
       "bioTooLong": "160 characters max."
     },
-    "interests": { "pickOne": "Pick at least one." },
-    "birthYear": { "invalid": "Enter a valid year." },
-    "country": { "invalid": "Choose a country." },
+    "interests": {
+      "pickOne": "Pick at least one."
+    },
+    "birthYear": {
+      "invalid": "Enter a valid year."
+    },
+    "country": {
+      "invalid": "Choose a country."
+    },
     "amount": {
       "invalid": "Enter a valid amount.",
       "positive": "Amount must be greater than zero.",
@@ -133,7 +143,10 @@
       "target_wrong_side": "Target must be above entry for a long and below entry for a short.",
       "invalidation_wrong_side": "Invalidation must be below entry for a long and above entry for a short."
     },
-    "comment": { "empty": "Write something first.", "tooLong": "500 characters max." }
+    "comment": {
+      "empty": "Write something first.",
+      "tooLong": "500 characters max."
+    }
   },
   "auth": {
     "welcome": {
@@ -336,6 +349,8 @@
     "hint": "try $HOPE, AAPLx or a username"
   },
   "asset": {
+    "priceLive": "live market price · CoinGecko",
+    "priceSimulated": "simulated price · demo token",
     "shareMessage": "{{symbol}} on hopium.family",
     "watch": "Add to watchlist",
     "unwatch": "Remove from watchlist",
@@ -690,10 +705,22 @@
       "title": "legend status unlocked",
       "body": "{{icon}} you earned a new badge. check your profile."
     },
-    "comment": { "title": "new comment", "body": "@{{username}} commented on your post." },
-    "like": { "title": "new like", "body": "@{{username}} liked your post." },
-    "follow": { "title": "new follower", "body": "@{{username}} started following you." },
-    "orderFilled": { "title": "order filled", "body": "Your {{side}} of {{symbol}} was filled." },
+    "comment": {
+      "title": "new comment",
+      "body": "@{{username}} commented on your post."
+    },
+    "like": {
+      "title": "new like",
+      "body": "@{{username}} liked your post."
+    },
+    "follow": {
+      "title": "new follower",
+      "body": "@{{username}} started following you."
+    },
+    "orderFilled": {
+      "title": "order filled",
+      "body": "Your {{side}} of {{symbol}} was filled."
+    },
     "followedTrade": {
       "title": "legend alert",
       "bodyBuy": "@{{username}} just bought {{symbol}}.",
@@ -703,21 +730,39 @@
       "title": "Position liquidated",
       "body": "Your {{market}} position was liquidated at its liquidation price."
     },
-    "tpHit": { "title": "Take-profit filled" },
-    "slHit": { "title": "Stop-loss filled" },
-    "tpslHit": { "body": "Your {{market}} position was closed." },
+    "tpHit": {
+      "title": "Take-profit filled"
+    },
+    "slHit": {
+      "title": "Stop-loss filled"
+    },
+    "tpslHit": {
+      "body": "Your {{market}} position was closed."
+    },
     "liquidationRisk": {
       "title": "Liquidation risk",
       "body": "Your {{market}} position is close to its estimated liquidation price."
     },
-    "deposit": { "title": "funds added", "body": "{{amount}} USDC arrived in your wallet." },
+    "deposit": {
+      "title": "funds added",
+      "body": "{{amount}} USDC arrived in your wallet."
+    },
     "thesis": {
-      "hit": { "title": "thesis hit 🎯" },
-      "invalidated": { "title": "Thesis invalidated" },
-      "expired": { "title": "Thesis expired" },
+      "hit": {
+        "title": "thesis hit 🎯"
+      },
+      "invalidated": {
+        "title": "Thesis invalidated"
+      },
+      "expired": {
+        "title": "Thesis expired"
+      },
       "body": "Your {{symbol}} thesis was resolved."
     },
-    "rankUp": { "title": "rank up", "body": "you're climbing. rank #{{rank}} 🚀" },
+    "rankUp": {
+      "title": "rank up",
+      "body": "you're climbing. rank #{{rank}} 🚀"
+    },
     "priceAlert": {
       "title": "price alert",
       "above": "{{symbol}} is above {{value}}.",
@@ -849,5 +894,25 @@
     "asset": "{{symbol}} price & trades",
     "user": "@{{username}} on hopium.family",
     "thesis": "{{direction}} {{symbol}} thesis by @{{username}}"
+  },
+  "getApp": {
+    "title": "get the app",
+    "body": "install hopium.family on your phone — it opens full screen like any other app.",
+    "alreadyTitle": "you're using the app ✓",
+    "alreadyBody": "hopium.family is installed on this device.",
+    "androidTitle": "Android",
+    "installButton": "install app",
+    "androidMenu": "In Chrome, open the ⋮ menu and tap \"Install app\" (or \"Add to Home screen\").",
+    "apkButton": "download Android app (APK)",
+    "apkNote": "Demo build signed for testing. Android asks you to allow installs from your browser the first time.",
+    "iosTitle": "iPhone & iPad",
+    "iosStep1": "Open hopium.family in Safari.",
+    "iosStep2": "Tap the Share button",
+    "iosStep3": "Choose \"Add to Home Screen\", then \"Add\".",
+    "iosNote": "Apple only allows App Store apps to install natively; the home-screen app runs the same hopium.family full screen.",
+    "scanTitle": "on your phone?",
+    "scanBody": "Scan to open this page on your phone.",
+    "installed": "installed. find hopium on your home screen 🫶",
+    "link": "get the app"
   }
 }

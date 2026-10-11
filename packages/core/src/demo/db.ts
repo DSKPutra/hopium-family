@@ -63,7 +63,7 @@ export interface DemoDb {
   pendingEmail: string | null;
 }
 
-export const DB_VERSION = 3;
+export const DB_VERSION = 4;
 
 export const DEFAULT_NOTIFICATION_SETTINGS: NotificationSettings = {
   followedTrades: true,

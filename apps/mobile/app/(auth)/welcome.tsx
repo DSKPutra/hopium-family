@@ -217,6 +217,16 @@ export default function Welcome() {
               {t('legal.risk')}
             </Text>
           </Pressable>
+          <Pressable
+            testID="welcome-get-app"
+            accessibilityRole="link"
+            onPress={() => router.push('/get-app')}
+            className="min-h-[44px] items-center justify-center"
+          >
+            <Text variant="small" weight="semibold" tone="primary">
+              📲 {t('getApp.link')}
+            </Text>
+          </Pressable>
         </View>
       </View>
     </SafeAreaView>

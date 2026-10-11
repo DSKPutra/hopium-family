@@ -2,7 +2,8 @@
  * Generates every brand asset from the shared logo geometry:
  *   assets/brand/logo-mark.svg, logo-wordmark(.light).svg, logo-full(.light).svg
  *   assets/images/icon.png (1024, opaque), adaptive-icon.png (1024, safe zone),
- *   splash-icon.png, favicon.png (48), og-image.png (1200×630)
+ *   splash-icon.png, favicon.png (48), og-image.png (1200×630),
+ *   public/icons/icon-192.png, icon-512.png, maskable-512.png (PWA)
  * Run: npm run icons
  */
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -115,6 +116,23 @@ async function main() {
     logoMarkSvg({ background: LOGO_COLORS.ink, scale: 0.85, cornerRadius: 230 }),
     join(imagesDir, 'apple-touch-icon.png'),
     180,
+  );
+
+  // PWA (installable web app): standard + maskable icons for Android/Chrome.
+  const pwaDir = join(root, 'apps/mobile/public/icons');
+  mkdirSync(pwaDir, { recursive: true });
+  for (const size of [192, 512])
+    await png(
+      logoMarkSvg({ background: LOGO_COLORS.ink, scale: 0.85, cornerRadius: 230 }),
+      join(pwaDir, `icon-${size}.png`),
+      size,
+    );
+  // Maskable: opaque full-bleed background, mark inside the 80% safe circle.
+  await png(
+    logoMarkSvg({ background: LOGO_COLORS.ink, scale: 0.62 }),
+    join(pwaDir, 'maskable-512.png'),
+    512,
+    LOGO_COLORS.ink,
   );
 
   // Open Graph card for shared links.

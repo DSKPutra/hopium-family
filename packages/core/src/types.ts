@@ -29,6 +29,8 @@ export interface Asset {
   listedAt?: ISODate;
   /** Mock holders count. */
   holders?: number;
+  /** Demo mode: 'live' when anchored to a real market price, else simulated. */
+  priceSource?: 'live' | 'simulated';
 }
 
 export interface Page<T> {

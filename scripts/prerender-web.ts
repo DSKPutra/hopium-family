@@ -165,7 +165,7 @@ function pageHtml(title: string, description: string, path: string, image: strin
   return shell
     .replace(/<title>[^<]*<\/title>/, `<title>${t}</title>`)
     .replace(
-      /<meta name="description" content="[^"]*">/,
+      /<meta name="description" content="[^"]*"\s*\/?>/,
       `<meta name="description" content="${d}">\n${tags}`,
     );
 }

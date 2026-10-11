@@ -230,6 +230,11 @@ export default function AssetDetail() {
           weight="bold"
         />
         <ChangeText pct={change} variant="body" locale={f.locale} />
+        {asset.priceSource ? (
+          <Text variant="micro" tone="muted" testID="price-source">
+            {asset.priceSource === 'live' ? t('asset.priceLive') : t('asset.priceSimulated')}
+          </Text>
+        ) : null}
       </View>
 
       {asset.tags.includes('meme') ? (

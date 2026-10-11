@@ -6,6 +6,7 @@ import {
   Home,
   LineChart,
   Settings,
+  Smartphone,
   Trophy,
   User,
   Wallet,
@@ -72,6 +73,12 @@ export function Sidebar() {
       label: t('nav.settings'),
       icon: Settings,
       match: (p) => p.startsWith('/settings'),
+    },
+    {
+      href: '/get-app',
+      label: t('getApp.link'),
+      icon: Smartphone,
+      match: (p) => p === '/get-app',
     },
   ];
   return (

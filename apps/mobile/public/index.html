@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+    />
+    <title>hopium.family</title>
+    <!-- description, theme-color and favicon are injected by Expo from app.config.ts (web). -->
+    <!-- Installable web app (Android/Chrome install prompt, iOS "Add to Home Screen"). -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="hopium" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <!-- react-native-web root reset; brand background before JS loads (no white flash). -->
+    <style id="expo-reset">
+      html,
+      body {
+        height: 100%;
+        background-color: #07060f;
+      }
+      body {
+        overflow: hidden;
+      }
+      #root {
+        display: flex;
+        height: 100%;
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run hopium.family.</noscript>
+    <div id="root"></div>
+  </body>
+</html>
