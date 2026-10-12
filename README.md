@@ -2,9 +2,12 @@
 
 **stay high on conviction.** A social-first trading app for crypto, stock tokens and perpetual futures. One Expo codebase ships web, iOS and Android.
 
-> Runs fully in **demo mode** by default. Every balance, price, trade and deposit is simulated. No keys, no real money.
+> Runs fully in **demo mode** by default: balances, trades and deposits are simulated (no keys, no real money), while crypto and tokenized-stock prices are real market prices from CoinGecko's free API. Fictional demo tokens ($HOPE, $FAM, …) are simulated.
+
+<p><img src="apps/mobile/assets/brand/creator-dsk-mark.svg" width="28" alt="" /> Designed and built by <strong>Dea Saka Kurnia Putra</strong> · © 2026 Dea Saka Kurnia Putra. All rights reserved (see <a href="COPYRIGHT">COPYRIGHT</a>).</p>
 
 - Live demo (web): https://hopium-family.vercel.app · https://hopium-family.netlify.app
+- Get the app: open https://hopium-family.vercel.app/get-app on your phone. Android: install from Chrome or download the APK ([latest release](https://github.com/DSKPutra/hopium-family/releases/latest)). iPhone: Safari → Share → Add to Home Screen.
 - Stack: Expo SDK 57 · React Native 0.86 · Expo Router · TypeScript strict · NativeWind 4 · TanStack Query 5 · Zustand · zod · decimal.js · Supabase
 
 ## Contents
@@ -236,3 +239,10 @@ The export is a single-page app (`web.output: "single"`), because routing and st
 - Candles and prices in demo mode are simulated (seeded GBM) and deterministic per seed.
 - The web build is a client-rendered SPA. Share pages with their own title and OG card are prerendered at build time for every catalog asset, perp market, demo trader and seeded thesis; profiles and theses created after the build fall back to the default card for crawlers.
 - iOS/Android were verified through TypeScript, Jest (jest-expo) and expo-doctor in this environment. Run the Maestro flow on a simulator build before release.
+
+## Credits & copyright
+
+hopium.family was designed and built by **Dea Saka Kurnia Putra** — *a brighter tomorrow through meaningful work.*
+
+© 2026 Dea Saka Kurnia Putra. All rights reserved. The hopium.family name and logo and the creator's personal mark may not be used without permission; see [COPYRIGHT](COPYRIGHT). Third-party dependencies remain under their own licenses.
+

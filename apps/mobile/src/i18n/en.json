@@ -914,5 +914,9 @@
     "scanBody": "Scan to open this page on your phone.",
     "installed": "installed. find hopium on your home screen 🫶",
     "link": "get the app"
+  },
+  "credit": {
+    "builtBy": "built by",
+    "copyright": "© {{year}} {{name}}. All rights reserved."
   }
 }

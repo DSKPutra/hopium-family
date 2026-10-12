@@ -6,6 +6,7 @@ import { Linking, View } from 'react-native';
 import { Seo } from '@/components/Seo';
 import { SubHeader } from '@/components/SubHeader';
 import { promptInstall, usePwa } from '@/lib/pwa';
+import { CreatorCredit } from '@/components/CreatorCredit';
 
 /** Stable link to the newest Android build attached to a GitHub release. */
 export const ANDROID_APK_URL =
@@ -113,6 +114,7 @@ export default function GetApp() {
           </Text>
         </Card>
       ) : null}
+      <CreatorCredit className="mb-6 mt-2" />
     </Screen>
   );
 }

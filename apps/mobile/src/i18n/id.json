@@ -914,5 +914,9 @@
     "scanBody": "Pindai untuk membuka halaman ini di HP kamu.",
     "installed": "terpasang. cari hopium di layar utama 🫶",
     "link": "pasang aplikasinya"
+  },
+  "credit": {
+    "builtBy": "dibuat oleh",
+    "copyright": "© {{year}} {{name}}. Hak cipta dilindungi undang-undang."
   }
 }

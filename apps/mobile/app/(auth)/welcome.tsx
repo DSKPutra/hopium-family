@@ -24,6 +24,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Seo } from '@/components/Seo';
 import { useServices } from '@/hooks/useServices';
 import { errorMessage } from '@/lib/errors';
+import { CreatorCredit } from '@/components/CreatorCredit';
 
 const VIEWABILITY = { itemVisiblePercentThreshold: 60 };
 
@@ -227,6 +228,7 @@ export default function Welcome() {
               📲 {t('getApp.link')}
             </Text>
           </Pressable>
+          <CreatorCredit compact className="mt-1" />
         </View>
       </View>
     </SafeAreaView>

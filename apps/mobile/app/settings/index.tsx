@@ -23,6 +23,7 @@ import { useMe } from '@/hooks/queries';
 import { useServices } from '@/hooks/useServices';
 import { env, isDemo } from '@/lib/env';
 import { useSettings } from '@/stores/settings';
+import { CreatorCredit } from '@/components/CreatorCredit';
 
 export default function Settings() {
   const { t } = useTranslation();
@@ -128,6 +129,7 @@ export default function Settings() {
         <Text variant="micro" tone={isDemo ? 'warning' : 'muted'} testID="mode-indicator">
           {isDemo ? t('settings.demoIndicator') : t('settings.liveIndicator')}
         </Text>
+        <CreatorCredit className="mt-4" />
       </View>
     </Screen>
   );

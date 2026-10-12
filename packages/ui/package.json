@@ -1,6 +1,7 @@
 {
   "name": "@hopium/ui",
   "version": "1.0.0",
+  "author": "Dea Saka Kurnia Putra",
   "private": true,
   "description": "hopium.family design tokens and primitive React Native components.",
   "main": "src/index.ts",

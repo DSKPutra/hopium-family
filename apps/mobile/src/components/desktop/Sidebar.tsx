@@ -16,6 +16,7 @@ import { Pressable, View } from 'react-native';
 
 import { useMe, useUnreadCount } from '@/hooks/queries';
 import { isDemo } from '@/lib/env';
+import { CreatorCredit } from '@/components/CreatorCredit';
 
 export function Sidebar() {
   const { t } = useTranslation();
@@ -156,6 +157,7 @@ export function Sidebar() {
       <Text variant="micro" tone="muted" className="px-2">
         {t('nav.shortcuts')}
       </Text>
+      <CreatorCredit compact className="mt-3 items-start" />
     </View>
   );
 }

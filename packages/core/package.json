@@ -1,6 +1,7 @@
 {
   "name": "@hopium/core",
   "version": "1.0.0",
+  "author": "Dea Saka Kurnia Putra",
   "private": true,
   "description": "Pure TypeScript domain layer: types, schemas, money + trading math, provider interfaces and mocks.",
   "main": "src/index.ts",
